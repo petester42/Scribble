@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="84">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+      <itemPath>ColourPalette.h</itemPath>
+      <itemPath>Keyboard.h</itemPath>
+      <itemPath>PalmRejection.h</itemPath>
+      <itemPath>Path.h</itemPath>
+      <itemPath>Point.h</itemPath>
+      <itemPath>ScreenAreas.h</itemPath>
+      <itemPath>SizeChooser.h</itemPath>
+      <itemPath>defines.h</itemPath>
+      <itemPath>inputData.h</itemPath>
+      <itemPath>loadFileWindow.h</itemPath>
+      <itemPath>mainwindow.h</itemPath>
+      <itemPath>menu.h</itemPath>
+      <itemPath>scribblearea.h</itemPath>
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+      <itemPath>From main</itemPath>
+      <itemPath>old_functions</itemPath>
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>ColourPalette.cpp</itemPath>
+      <itemPath>Keyboard.cpp</itemPath>
+      <itemPath>PalmRejection.cpp</itemPath>
+      <itemPath>Path.cpp</itemPath>
+      <itemPath>Point.cpp</itemPath>
+      <itemPath>ScreenAreas.cpp</itemPath>
+      <itemPath>SizeChooser.cpp</itemPath>
+      <itemPath>inputData.cpp</itemPath>
+      <itemPath>loadFileWindow.cpp</itemPath>
+      <itemPath>main.cpp</itemPath>
+      <itemPath>mainwindow.cpp</itemPath>
+      <itemPath>menu.cpp</itemPath>
+      <itemPath>scribblearea.cpp</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+    <itemPath>scribble.pro</itemPath>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="4">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>GNU|GNU</compilerSet>
+      </toolsSet>
+      <qt>
+        <modules>core gui</modules>
+        <defs>
+          <Elem>QMAKE_CXXFLAGS += -O0</Elem>
+        </defs>
+      </qt>
+      <compileType>
+        <ccTool>
+          <incDir>
+            <pElem>/usr/lib</pElem>
+            <pElem>/usr/lib64</pElem>
+          </incDir>
+        </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibLibItem>poppler-qt4</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+    </conf>
+    <conf name="Release" type="4">
+      <toolsSet>
+        <remote-sources-mode>LOCAL_SOURCES</remote-sources-mode>
+        <compilerSet>default</compilerSet>
+      </toolsSet>
+      <qt>
+        <buildMode>1</buildMode>
+        <modules>core gui</modules>
+      </qt>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+          <incDir>
+            <pElem>/usr/lib</pElem>
+          </incDir>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibLibItem>poppler-qt4</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
+      </compileType>
+    </conf>
+  </confs>
+</configurationDescriptor>

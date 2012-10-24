@@ -1,0 +1,235 @@
+\hypertarget{classPath}{
+\section{Path Class Reference}
+\label{classPath}\index{Path@{Path}}
+}
+
+
+{\ttfamily \#include $<$Path.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classPath_a5bf647496429909133e8f4f224f8f882}{Path} (int mode, QColor color, int width, int \hyperlink{classPath_a5c1880b5bc26ef03c335687c6edd7921}{ID}, bool \hyperlink{classPath_a657da9ea45a6b01a77c7b5442cace564}{final}=true)
+\item 
+\hyperlink{classPath_a5e77b7ba66269d687e0f42a41088fc82}{Path} (const \hyperlink{classPath}{Path} \&orig)
+\item 
+virtual \hyperlink{classPath_a141da9ff89c85e0ba410b5a73864c267}{$\sim$Path} ()
+\item 
+void \hyperlink{classPath_a1610bba846616d5109fb505fdf902298}{addPoint} (\hyperlink{classPoint}{Point} $\ast$point)
+\item 
+std::vector$<$ \hyperlink{classPoint}{Point} $\ast$ $>$ \hyperlink{classPath_a0ef674b3f5c9c7d2f2b5b210fa54d7e9}{getPath} ()
+\item 
+int \hyperlink{classPath_a148b0baa2335d7e6f8a8d608c4ed5be7}{getPenWidth} ()
+\item 
+QColor \hyperlink{classPath_ab1e4f5182ce9a25cd2efddc0d0e0c3da}{getPenColor} () const 
+\item 
+int \hyperlink{classPath_a8735925feeee073c98906c0d8dd00397}{getMode} () const 
+\item 
+void \hyperlink{classPath_a20a988490d9fbf277de8b7c773be9925}{setEraseMode} ()
+\item 
+void \hyperlink{classPath_a0c95b3ec75c14f0683db1a3894240ad7}{setWriteMode} ()
+\item 
+int \hyperlink{classPath_ac249bd9daa1240c74ad2f3d57dd94d28}{getPathID} () const 
+\item 
+void \hyperlink{classPath_acb7454dd8e4b007f93b11042fb5fe025}{disablePath} ()
+\item 
+void \hyperlink{classPath_a4d622d8253416598cafe0a787a84e9e7}{enablePath} ()
+\item 
+bool \hyperlink{classPath_a5ea27f57363b51a7f6b6d90dc2d424bb}{isEnabled} () const 
+\item 
+void \hyperlink{classPath_af70e0919d6eb3319a883ad7a28ac13cc}{clearPoints} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classPath_ae2d6268c79888176aece5b76350810a2}{WriteEraseMode}
+\item 
+int \hyperlink{classPath_aaa655eaed9bc76b4be7a83e798cafdc4}{myPenWidth}
+\item 
+QColor \hyperlink{classPath_aa4957231df4c43c1dff18df7caa4f0d8}{myPenColor}
+\item 
+std::vector$<$ \hyperlink{classPoint}{Point} $\ast$ $>$ \hyperlink{classPath_a88b86252aa1a027b0417a8d5a2dc3f2d}{mPointsVector}
+\item 
+int \hyperlink{classPath_a5c1880b5bc26ef03c335687c6edd7921}{ID}
+\item 
+bool \hyperlink{classPath_a80d925a5ed65133cd0e96bc2a10a2d3c}{active}
+\item 
+bool \hyperlink{classPath_a657da9ea45a6b01a77c7b5442cace564}{final}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+File: \hyperlink{Path_8h}{Path.h} Author: greg
+
+Created on March 3, 2012, 11:55 AM 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classPath_a5bf647496429909133e8f4f224f8f882}{
+\index{Path@{Path}!Path@{Path}}
+\index{Path@{Path}!Path@{Path}}
+\subsubsection[{Path}]{\setlength{\rightskip}{0pt plus 5cm}Path::Path (int {\em mode}, \/  QColor {\em color}, \/  int {\em width}, \/  int {\em ID}, \/  bool {\em final} = {\ttfamily true})}}
+\label{classPath_a5bf647496429909133e8f4f224f8f882}
+\hypertarget{classPath_a5e77b7ba66269d687e0f42a41088fc82}{
+\index{Path@{Path}!Path@{Path}}
+\index{Path@{Path}!Path@{Path}}
+\subsubsection[{Path}]{\setlength{\rightskip}{0pt plus 5cm}Path::Path (const {\bf Path} \& {\em orig})}}
+\label{classPath_a5e77b7ba66269d687e0f42a41088fc82}
+Paths Copy constructor 
+\begin{DoxyParams}{Parameters}
+\item[{\em \&orig}]Original paths object \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Paths instance copy
+\end{DoxyReturn}
+The return object is a new path object (with the same ID) with the exception of the path points. This object contains a vector of pointers to the original points and therefore special care needs to be taken when deleting this object. \hypertarget{classPath_a141da9ff89c85e0ba410b5a73864c267}{
+\index{Path@{Path}!$\sim$Path@{$\sim$Path}}
+\index{$\sim$Path@{$\sim$Path}!Path@{Path}}
+\subsubsection[{$\sim$Path}]{\setlength{\rightskip}{0pt plus 5cm}Path::$\sim$Path ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classPath_a141da9ff89c85e0ba410b5a73864c267}
+$\sim$Paths Default destructor
+
+Deletes all the Points in the vector 
+
+\subsection{Member Function Documentation}
+\hypertarget{classPath_a1610bba846616d5109fb505fdf902298}{
+\index{Path@{Path}!addPoint@{addPoint}}
+\index{addPoint@{addPoint}!Path@{Path}}
+\subsubsection[{addPoint}]{\setlength{\rightskip}{0pt plus 5cm}void Path::addPoint ({\bf Point} $\ast$ {\em point})}}
+\label{classPath_a1610bba846616d5109fb505fdf902298}
+Add a point to the \hyperlink{classPath}{Path} 
+\begin{DoxyParams}{Parameters}
+\item[{\em $\ast$point}]A pointer to a \hyperlink{classPoint}{Point}\end{DoxyParams}
+Add a new point to the present path. \hypertarget{classPath_af70e0919d6eb3319a883ad7a28ac13cc}{
+\index{Path@{Path}!clearPoints@{clearPoints}}
+\index{clearPoints@{clearPoints}!Path@{Path}}
+\subsubsection[{clearPoints}]{\setlength{\rightskip}{0pt plus 5cm}void Path::clearPoints ()}}
+\label{classPath_af70e0919d6eb3319a883ad7a28ac13cc}
+Clear the vector of point pointers
+
+This function clears the vector of points {\bfseries without} deleting the actual point objects \hypertarget{classPath_acb7454dd8e4b007f93b11042fb5fe025}{
+\index{Path@{Path}!disablePath@{disablePath}}
+\index{disablePath@{disablePath}!Path@{Path}}
+\subsubsection[{disablePath}]{\setlength{\rightskip}{0pt plus 5cm}void Path::disablePath ()}}
+\label{classPath_acb7454dd8e4b007f93b11042fb5fe025}
+Disable current path
+
+This function is used to disable a path. A disable path means that there is a more up to date version of this path so that this one is not used. Needed for rendering.
+
+An old copy of the path is used in the case the user would undo a change to a more recent version of a path. \hypertarget{classPath_a4d622d8253416598cafe0a787a84e9e7}{
+\index{Path@{Path}!enablePath@{enablePath}}
+\index{enablePath@{enablePath}!Path@{Path}}
+\subsubsection[{enablePath}]{\setlength{\rightskip}{0pt plus 5cm}void Path::enablePath ()}}
+\label{classPath_a4d622d8253416598cafe0a787a84e9e7}
+Enable current path
+
+This function is used to enable a path. An enabled path means that this is the most up to date path and it needs to be used whenever rendering. \hypertarget{classPath_a8735925feeee073c98906c0d8dd00397}{
+\index{Path@{Path}!getMode@{getMode}}
+\index{getMode@{getMode}!Path@{Path}}
+\subsubsection[{getMode}]{\setlength{\rightskip}{0pt plus 5cm}int Path::getMode () const}}
+\label{classPath_a8735925feeee073c98906c0d8dd00397}
+Get path mode \begin{DoxyReturn}{Returns}
+Mode An integer representing a Write/Erase mode
+\end{DoxyReturn}
+This function returns the mode of the current path. It can be either write or erase:
+\begin{DoxyItemize}
+\item 0: Write
+\item 1: Erase
+\end{DoxyItemize}
+
+{\bfseries Should create a ENUM with only 2 options: Write and Erase} \hypertarget{classPath_a0ef674b3f5c9c7d2f2b5b210fa54d7e9}{
+\index{Path@{Path}!getPath@{getPath}}
+\index{getPath@{getPath}!Path@{Path}}
+\subsubsection[{getPath}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$ {\bf Point} $\ast$ $>$ Path::getPath ()}}
+\label{classPath_a0ef674b3f5c9c7d2f2b5b210fa54d7e9}
+Get the path \begin{DoxyReturn}{Returns}
+vector$<$Point$\ast$$>$ A vector of \hyperlink{classPoint}{Point} pointers 
+\end{DoxyReturn}
+\hypertarget{classPath_ac249bd9daa1240c74ad2f3d57dd94d28}{
+\index{Path@{Path}!getPathID@{getPathID}}
+\index{getPathID@{getPathID}!Path@{Path}}
+\subsubsection[{getPathID}]{\setlength{\rightskip}{0pt plus 5cm}int Path::getPathID () const}}
+\label{classPath_ac249bd9daa1240c74ad2f3d57dd94d28}
+Get path ID \begin{DoxyReturn}{Returns}
+ID The current path ID
+\end{DoxyReturn}
+Each path has an unique ID and it can be obtained using this function. The ID corresponds to a collection of points regardless of its mode. \hypertarget{classPath_ab1e4f5182ce9a25cd2efddc0d0e0c3da}{
+\index{Path@{Path}!getPenColor@{getPenColor}}
+\index{getPenColor@{getPenColor}!Path@{Path}}
+\subsubsection[{getPenColor}]{\setlength{\rightskip}{0pt plus 5cm}QColor Path::getPenColor () const}}
+\label{classPath_ab1e4f5182ce9a25cd2efddc0d0e0c3da}
+Get pen color \begin{DoxyReturn}{Returns}
+Color A QColor representing the current path color
+\end{DoxyReturn}
+This function returns a QColor representing the color on he current path \hypertarget{classPath_a148b0baa2335d7e6f8a8d608c4ed5be7}{
+\index{Path@{Path}!getPenWidth@{getPenWidth}}
+\index{getPenWidth@{getPenWidth}!Path@{Path}}
+\subsubsection[{getPenWidth}]{\setlength{\rightskip}{0pt plus 5cm}int Path::getPenWidth ()}}
+\label{classPath_a148b0baa2335d7e6f8a8d608c4ed5be7}
+Get pen width \begin{DoxyReturn}{Returns}
+penWidth An integer representing the pen width
+\end{DoxyReturn}
+This function returns the width of the pen used to draw the current path. \hypertarget{classPath_a5ea27f57363b51a7f6b6d90dc2d424bb}{
+\index{Path@{Path}!isEnabled@{isEnabled}}
+\index{isEnabled@{isEnabled}!Path@{Path}}
+\subsubsection[{isEnabled}]{\setlength{\rightskip}{0pt plus 5cm}bool Path::isEnabled () const}}
+\label{classPath_a5ea27f57363b51a7f6b6d90dc2d424bb}
+Is the current path enabled
+
+\begin{DoxyReturn}{Returns}
+Enabled Return true is the path is enabled
+\end{DoxyReturn}
+This function allows the user to know if the current path is enabled or not. \hypertarget{classPath_a20a988490d9fbf277de8b7c773be9925}{
+\index{Path@{Path}!setEraseMode@{setEraseMode}}
+\index{setEraseMode@{setEraseMode}!Path@{Path}}
+\subsubsection[{setEraseMode}]{\setlength{\rightskip}{0pt plus 5cm}void Path::setEraseMode ()}}
+\label{classPath_a20a988490d9fbf277de8b7c773be9925}
+Set path to Erase mode
+
+The current path will be set to erase mode. \hypertarget{classPath_a0c95b3ec75c14f0683db1a3894240ad7}{
+\index{Path@{Path}!setWriteMode@{setWriteMode}}
+\index{setWriteMode@{setWriteMode}!Path@{Path}}
+\subsubsection[{setWriteMode}]{\setlength{\rightskip}{0pt plus 5cm}void Path::setWriteMode ()}}
+\label{classPath_a0c95b3ec75c14f0683db1a3894240ad7}
+Set path to Write mode
+
+The current path will be set to write mode. 
+
+\subsection{Member Data Documentation}
+\hypertarget{classPath_a80d925a5ed65133cd0e96bc2a10a2d3c}{
+\index{Path@{Path}!active@{active}}
+\index{active@{active}!Path@{Path}}
+\subsubsection[{active}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf Path::active}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classPath_a80d925a5ed65133cd0e96bc2a10a2d3c}
+\hypertarget{classPath_a657da9ea45a6b01a77c7b5442cace564}{
+\index{Path@{Path}!final@{final}}
+\index{final@{final}!Path@{Path}}
+\subsubsection[{final}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf Path::final}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classPath_a657da9ea45a6b01a77c7b5442cace564}
+Used to determine if the path is really what the user wanted to write or not \hypertarget{classPath_a5c1880b5bc26ef03c335687c6edd7921}{
+\index{Path@{Path}!ID@{ID}}
+\index{ID@{ID}!Path@{Path}}
+\subsubsection[{ID}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Path::ID}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classPath_a5c1880b5bc26ef03c335687c6edd7921}
+\hypertarget{classPath_a88b86252aa1a027b0417a8d5a2dc3f2d}{
+\index{Path@{Path}!mPointsVector@{mPointsVector}}
+\index{mPointsVector@{mPointsVector}!Path@{Path}}
+\subsubsection[{mPointsVector}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<${\bf Point} $\ast$$>$ {\bf Path::mPointsVector}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classPath_a88b86252aa1a027b0417a8d5a2dc3f2d}
+\hypertarget{classPath_aa4957231df4c43c1dff18df7caa4f0d8}{
+\index{Path@{Path}!myPenColor@{myPenColor}}
+\index{myPenColor@{myPenColor}!Path@{Path}}
+\subsubsection[{myPenColor}]{\setlength{\rightskip}{0pt plus 5cm}QColor {\bf Path::myPenColor}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classPath_aa4957231df4c43c1dff18df7caa4f0d8}
+\hypertarget{classPath_aaa655eaed9bc76b4be7a83e798cafdc4}{
+\index{Path@{Path}!myPenWidth@{myPenWidth}}
+\index{myPenWidth@{myPenWidth}!Path@{Path}}
+\subsubsection[{myPenWidth}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Path::myPenWidth}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classPath_aaa655eaed9bc76b4be7a83e798cafdc4}
+\hypertarget{classPath_ae2d6268c79888176aece5b76350810a2}{
+\index{Path@{Path}!WriteEraseMode@{WriteEraseMode}}
+\index{WriteEraseMode@{WriteEraseMode}!Path@{Path}}
+\subsubsection[{WriteEraseMode}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf Path::WriteEraseMode}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classPath_ae2d6268c79888176aece5b76350810a2}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Path_8h}{Path.h}\item 
+\hyperlink{Path_8cpp}{Path.cpp}\end{DoxyCompactItemize}

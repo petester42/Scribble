@@ -1,0 +1,360 @@
+
+==11665== 16 bytes in 1 blocks are definitely lost in loss record 206 of 678
+==11665==    at 0x400682F: malloc (vg_replace_malloc.c:236)
+==11665==    by 0x2617C3: FcPatternCreate (in /usr/lib/libfontconfig.so.1.4.4)
+==11665==    by 0x25F3F0: FcFontRenderPrepare (in /usr/lib/libfontconfig.so.1.4.4)
+==11665==    by 0x25F67A: FcFontMatch (in /usr/lib/libfontconfig.so.1.4.4)
+==11665==    by 0x4443635: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x4447F9F: QFontDatabase::load(QFontPrivate const*, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x441EBA0: QFontPrivate::engineForScript(int) const (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x44363C6: QFontMetricsF::leading() const (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x43427C2: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x43435D0: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x4436F6A: QFontMetrics::boundingRect(QRect const&, int, QString const&, int, int*) const (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x443702B: QFontMetrics::size(int, QString const&, int, int*) const (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   fun:malloc
+   fun:FcPatternCreate
+   fun:FcFontRenderPrepare
+   fun:FcFontMatch
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   fun:_ZN13QFontDatabase4loadEPK12QFontPrivatei
+   fun:_ZNK12QFontPrivate15engineForScriptEi
+   fun:_ZNK13QFontMetricsF7leadingEv
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   fun:_ZNK12QFontMetrics12boundingRectERK5QRectiRK7QStringiPi
+   fun:_ZNK12QFontMetrics4sizeEiRK7QStringiPi
+}
+==11665== 28 (24 direct, 4 indirect) bytes in 1 blocks are definitely lost in loss record 277 of 678
+==11665==    at 0x400737F: operator new(unsigned int) (vg_replace_malloc.c:255)
+==11665==    by 0x3F2850B: Splash::Splash(SplashBitmap*, int, SplashScreenParams*) (in /usr/lib/libpoppler.so.5.0.0)
+==11665==    by 0x3E7038F: SplashOutputDev::SplashOutputDev(SplashColorMode, int, int, unsigned char*, int, int) (in /usr/lib/libpoppler.so.5.0.0)
+==11665==    by 0x40451A8: Poppler::Page::renderToImage(double, double, int, int, int, int, Poppler::Page::Rotation) const (in /usr/lib/libpoppler-qt4.so.3.2.0)
+==11665==    by 0x804C04F: ScribbleArea::updatePDF() (scribblearea.cpp:86)
+==11665==    by 0x804C295: ScribbleArea::loadPDF_withPagesCount() (scribblearea.cpp:121)
+==11665==    by 0x804BC13: ScribbleArea::ScribbleArea(QWidget*) (scribblearea.cpp:15)
+==11665==    by 0x8051078: MainWindow::MainWindow() (mainwindow.cpp:12)
+==11665==    by 0x8052828: main (main.cpp:17)
+==11665== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   fun:_Znwj
+   fun:_ZN6SplashC1EP12SplashBitmapiP18SplashScreenParams
+   fun:_ZN15SplashOutputDevC1E15SplashColorModeiiPhii
+   fun:_ZNK7Poppler4Page13renderToImageEddiiiiNS0_8RotationE
+   fun:_ZN12ScribbleArea9updatePDFEv
+   fun:_ZN12ScribbleArea22loadPDF_withPagesCountEv
+   fun:_ZN12ScribbleAreaC1EP7QWidget
+   fun:_ZN10MainWindowC1Ev
+   fun:main
+}
+==11665== 122 (56 direct, 66 indirect) bytes in 1 blocks are definitely lost in loss record 549 of 678
+==11665==    at 0x400737F: operator new(unsigned int) (vg_replace_malloc.c:255)
+==11665==    by 0x4CAF917: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFD97: QLibrary::setFileNameAndVersion(QString const&, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFE54: QLibrary::QLibrary(QString const&, int, QObject*) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4254FCF: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x426243C: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4227: QApplicationPrivate::construct(_XDisplay*, unsigned long, unsigned long) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4B19: QApplication::QApplication(int&, char**, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x805281C: main (main.cpp:16)
+==11665== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   fun:_Znwj
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0
+   fun:_ZN8QLibrary21setFileNameAndVersionERK7QStringi
+   fun:_ZN8QLibraryC1ERK7QStringiP7QObject
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   fun:_ZN19QApplicationPrivate9constructEP9_XDisplaymm
+   fun:_ZN12QApplicationC1ERiPPci
+   fun:main
+}
+==11665== 138 (56 direct, 82 indirect) bytes in 1 blocks are definitely lost in loss record 555 of 678
+==11665==    at 0x400737F: operator new(unsigned int) (vg_replace_malloc.c:255)
+==11665==    by 0x4CAF917: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFD97: QLibrary::setFileNameAndVersion(QString const&, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFE54: QLibrary::QLibrary(QString const&, int, QObject*) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4254FCF: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x42638B8: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4227: QApplicationPrivate::construct(_XDisplay*, unsigned long, unsigned long) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4B19: QApplication::QApplication(int&, char**, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x805281C: main (main.cpp:16)
+==11665== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   fun:_Znwj
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0
+   fun:_ZN8QLibrary21setFileNameAndVersionERK7QStringi
+   fun:_ZN8QLibraryC1ERK7QStringiP7QObject
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   fun:_ZN19QApplicationPrivate9constructEP9_XDisplaymm
+   fun:_ZN12QApplicationC1ERiPPci
+   fun:main
+}
+==11665== 158 (56 direct, 102 indirect) bytes in 1 blocks are definitely lost in loss record 561 of 678
+==11665==    at 0x400737F: operator new(unsigned int) (vg_replace_malloc.c:255)
+==11665==    by 0x4CAF917: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFD97: QLibrary::setFileNameAndVersion(QString const&, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFE54: QLibrary::QLibrary(QString const&, int, QObject*) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4263A23: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4227: QApplicationPrivate::construct(_XDisplay*, unsigned long, unsigned long) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4B19: QApplication::QApplication(int&, char**, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x805281C: main (main.cpp:16)
+==11665== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   fun:_Znwj
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0
+   fun:_ZN8QLibrary21setFileNameAndVersionERK7QStringi
+   fun:_ZN8QLibraryC1ERK7QStringiP7QObject
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   fun:_ZN19QApplicationPrivate9constructEP9_XDisplaymm
+   fun:_ZN12QApplicationC1ERiPPci
+   fun:main
+}
+==11665== 162 (56 direct, 106 indirect) bytes in 1 blocks are definitely lost in loss record 565 of 678
+==11665==    at 0x400737F: operator new(unsigned int) (vg_replace_malloc.c:255)
+==11665==    by 0x4CAF917: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFD97: QLibrary::setFileNameAndVersion(QString const&, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFE54: QLibrary::QLibrary(QString const&, int, QObject*) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4262208: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4227: QApplicationPrivate::construct(_XDisplay*, unsigned long, unsigned long) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4B19: QApplication::QApplication(int&, char**, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x805281C: main (main.cpp:16)
+==11665== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   fun:_Znwj
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0
+   fun:_ZN8QLibrary21setFileNameAndVersionERK7QStringi
+   fun:_ZN8QLibraryC1ERK7QStringiP7QObject
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   fun:_ZN19QApplicationPrivate9constructEP9_XDisplaymm
+   fun:_ZN12QApplicationC1ERiPPci
+   fun:main
+}
+==11665== 162 (56 direct, 106 indirect) bytes in 1 blocks are definitely lost in loss record 566 of 678
+==11665==    at 0x400737F: operator new(unsigned int) (vg_replace_malloc.c:255)
+==11665==    by 0x4CAF917: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFD97: QLibrary::setFileNameAndVersion(QString const&, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFE54: QLibrary::QLibrary(QString const&, int, QObject*) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFEBA: QLibrary::resolve(QString const&, int, char const*) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x45AED5D: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x45AEE61: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x4591BC4: QGtkStyle::getGConfBool(QString const&, bool) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x426426F: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4227: QApplicationPrivate::construct(_XDisplay*, unsigned long, unsigned long) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4B19: QApplication::QApplication(int&, char**, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x805281C: main (main.cpp:16)
+==11665== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   fun:_Znwj
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0
+   fun:_ZN8QLibrary21setFileNameAndVersionERK7QStringi
+   fun:_ZN8QLibraryC1ERK7QStringiP7QObject
+   fun:_ZN8QLibrary7resolveERK7QStringiPKc
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   fun:_ZN9QGtkStyle12getGConfBoolERK7QStringb
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   fun:_ZN19QApplicationPrivate9constructEP9_XDisplaymm
+   fun:_ZN12QApplicationC1ERiPPci
+   fun:main
+}
+==11665== 166 (56 direct, 110 indirect) bytes in 1 blocks are definitely lost in loss record 567 of 678
+==11665==    at 0x400737F: operator new(unsigned int) (vg_replace_malloc.c:255)
+==11665==    by 0x4CAF917: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFD97: QLibrary::setFileNameAndVersion(QString const&, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFE54: QLibrary::QLibrary(QString const&, int, QObject*) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4262318: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4227: QApplicationPrivate::construct(_XDisplay*, unsigned long, unsigned long) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4B19: QApplication::QApplication(int&, char**, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x805281C: main (main.cpp:16)
+==11665== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   fun:_Znwj
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0
+   fun:_ZN8QLibrary21setFileNameAndVersionERK7QStringi
+   fun:_ZN8QLibraryC1ERK7QStringiP7QObject
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   fun:_ZN19QApplicationPrivate9constructEP9_XDisplaymm
+   fun:_ZN12QApplicationC1ERiPPci
+   fun:main
+}
+==11665== 172 (56 direct, 116 indirect) bytes in 1 blocks are definitely lost in loss record 569 of 678
+==11665==    at 0x400737F: operator new(unsigned int) (vg_replace_malloc.c:255)
+==11665==    by 0x4CAF917: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFD97: QLibrary::setFileNameAndVersion(QString const&, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFE54: QLibrary::QLibrary(QString const&, int, QObject*) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFEBA: QLibrary::resolve(QString const&, int, char const*) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x45ACCE1: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x45AB3E1: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x4591E64: QGtkStyle::QGtkStyle() (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x450D4D9: QStyleFactory::create(QString const&) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41DDB9C: QApplication::style() (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4114: QApplicationPrivate::initialize() (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E422F: QApplicationPrivate::construct(_XDisplay*, unsigned long, unsigned long) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   fun:_Znwj
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0
+   fun:_ZN8QLibrary21setFileNameAndVersionERK7QStringi
+   fun:_ZN8QLibraryC1ERK7QStringiP7QObject
+   fun:_ZN8QLibrary7resolveERK7QStringiPKc
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   fun:_ZN9QGtkStyleC1Ev
+   fun:_ZN13QStyleFactory6createERK7QString
+   fun:_ZN12QApplication5styleEv
+   fun:_ZN19QApplicationPrivate10initializeEv
+   fun:_ZN19QApplicationPrivate9constructEP9_XDisplaymm
+}
+==11665== 176 (56 direct, 120 indirect) bytes in 1 blocks are definitely lost in loss record 570 of 678
+==11665==    at 0x400737F: operator new(unsigned int) (vg_replace_malloc.c:255)
+==11665==    by 0x4CAF917: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFD97: QLibrary::setFileNameAndVersion(QString const&, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFE54: QLibrary::QLibrary(QString const&, int, QObject*) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFEBA: QLibrary::resolve(QString const&, int, char const*) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x45ACD2E: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x45AB3E1: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x4591E64: QGtkStyle::QGtkStyle() (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x450D4D9: QStyleFactory::create(QString const&) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41DDB9C: QApplication::style() (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4114: QApplicationPrivate::initialize() (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E422F: QApplicationPrivate::construct(_XDisplay*, unsigned long, unsigned long) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   fun:_Znwj
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0
+   fun:_ZN8QLibrary21setFileNameAndVersionERK7QStringi
+   fun:_ZN8QLibraryC1ERK7QStringiP7QObject
+   fun:_ZN8QLibrary7resolveERK7QStringiPKc
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   fun:_ZN9QGtkStyleC1Ev
+   fun:_ZN13QStyleFactory6createERK7QString
+   fun:_ZN12QApplication5styleEv
+   fun:_ZN19QApplicationPrivate10initializeEv
+   fun:_ZN19QApplicationPrivate9constructEP9_XDisplaymm
+}
+==11665== 180 (56 direct, 124 indirect) bytes in 1 blocks are definitely lost in loss record 571 of 678
+==11665==    at 0x400737F: operator new(unsigned int) (vg_replace_malloc.c:255)
+==11665==    by 0x4CAF917: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFD97: QLibrary::setFileNameAndVersion(QString const&, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CAFE54: QLibrary::QLibrary(QString const&, int, QObject*) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x45AC1DE: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x45AB3E1: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x4591E64: QGtkStyle::QGtkStyle() (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x450D4D9: QStyleFactory::create(QString const&) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41DDB9C: QApplication::style() (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4114: QApplicationPrivate::initialize() (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E422F: QApplicationPrivate::construct(_XDisplay*, unsigned long, unsigned long) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x41E4B19: QApplication::QApplication(int&, char**, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   fun:_Znwj
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0
+   fun:_ZN8QLibrary21setFileNameAndVersionERK7QStringi
+   fun:_ZN8QLibraryC1ERK7QStringiP7QObject
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   fun:_ZN9QGtkStyleC1Ev
+   fun:_ZN13QStyleFactory6createERK7QString
+   fun:_ZN12QApplication5styleEv
+   fun:_ZN19QApplicationPrivate10initializeEv
+   fun:_ZN19QApplicationPrivate9constructEP9_XDisplaymm
+   fun:_ZN12QApplicationC1ERiPPci
+}
+==11665== 836 (256 direct, 580 indirect) bytes in 1 blocks are definitely lost in loss record 623 of 678
+==11665==    at 0x400694D: realloc (vg_replace_malloc.c:525)
+==11665==    by 0x26216E: ??? (in /usr/lib/libfontconfig.so.1.4.4)
+==11665==    by 0x262BFC: ??? (in /usr/lib/libfontconfig.so.1.4.4)
+==11665==    by 0x26334C: ??? (in /usr/lib/libfontconfig.so.1.4.4)
+==11665==    by 0x25F4A5: FcFontRenderPrepare (in /usr/lib/libfontconfig.so.1.4.4)
+==11665==    by 0x25F67A: FcFontMatch (in /usr/lib/libfontconfig.so.1.4.4)
+==11665==    by 0x4443635: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x4447F9F: QFontDatabase::load(QFontPrivate const*, int) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x441EBA0: QFontPrivate::engineForScript(int) const (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x44363C6: QFontMetricsF::leading() const (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x43427C2: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x43435D0: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   fun:realloc
+   obj:/usr/lib/libfontconfig.so.1.4.4
+   obj:/usr/lib/libfontconfig.so.1.4.4
+   obj:/usr/lib/libfontconfig.so.1.4.4
+   fun:FcFontRenderPrepare
+   fun:FcFontMatch
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   fun:_ZN13QFontDatabase4loadEPK12QFontPrivatei
+   fun:_ZNK12QFontPrivate15engineForScriptEi
+   fun:_ZNK13QFontMetricsF7leadingEv
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+}
+==11665== 2,836 (392 direct, 2,444 indirect) bytes in 7 blocks are definitely lost in loss record 664 of 678
+==11665==    at 0x400737F: operator new(unsigned int) (vg_replace_malloc.c:255)
+==11665==    by 0x4CAF917: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CA74AF: QFactoryLoader::updateDir(QString const&, QSettings&) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CA950B: QFactoryLoader::update() (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x4CA9826: QFactoryLoader::QFactoryLoader(char const*, QString const&, Qt::CaseSensitivity) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0)
+==11665==    by 0x42AF008: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x42AF13A: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x42B1428: ??? (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x42B2CEF: QImageReader::read(QImage*) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x42B2ED6: QImageReader::read() (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x42C814A: QPixmapData::fromFile(QString const&, char const*, QFlags<Qt::ImageConversionFlag>) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665==    by 0x42C34C8: QPixmap::load(QString const&, char const*, QFlags<Qt::ImageConversionFlag>) (in /usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0)
+==11665== 
+{
+   <insert_a_suppression_name_here>
+   Memcheck:Leak
+   fun:_Znwj
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtCore.so.4.8.0
+   fun:_ZN14QFactoryLoader9updateDirERK7QStringR9QSettings
+   fun:_ZN14QFactoryLoader6updateEv
+   fun:_ZN14QFactoryLoaderC1EPKcRK7QStringN2Qt15CaseSensitivityE
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   obj:/usr/local/Trolltech/Qt-4.8.0/lib/libQtGui.so.4.8.0
+   fun:_ZN12QImageReader4readEP6QImage
+   fun:_ZN12QImageReader4readEv
+   fun:_ZN11QPixmapData8fromFileERK7QStringPKc6QFlagsIN2Qt19ImageConversionFlagEE
+   fun:_ZN7QPixmap4loadERK7QStringPKc6QFlagsIN2Qt19ImageConversionFlagEE
+}
+==11665== LEAK SUMMARY:
+==11665==    definitely lost: 1,192 bytes in 19 blocks
+==11665==    indirectly lost: 3,960 bytes in 75 blocks
+==11665==      possibly lost: 29,540 bytes in 218 blocks
+==11665==    still reachable: 184,389 bytes in 3,211 blocks
+==11665==         suppressed: 0 bytes in 0 blocks
+==11665== Reachable blocks (those to which a pointer was found) are not shown.
+==11665== To see them, rerun with: --leak-check=full --show-reachable=yes
+==11665== 
+==11665== For counts of detected and suppressed errors, rerun with: -v
+==11665== ERROR SUMMARY: 224 errors from 143 contexts (suppressed: 133 from 10)

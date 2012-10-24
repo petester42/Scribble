@@ -1,0 +1,472 @@
+\hypertarget{classScribbleArea}{
+\section{ScribbleArea Class Reference}
+\label{classScribbleArea}\index{ScribbleArea@{ScribbleArea}}
+}
+
+
+{\ttfamily \#include $<$scribblearea.h$>$}\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classScribbleArea_a3560f2a44b46531591a1f4b1e42ea86f}{ScribbleArea} (QWidget $\ast$parent=0)
+\item 
+virtual \hyperlink{classScribbleArea_a5067be9932626a2ea5d041cb0f53a070}{$\sim$ScribbleArea} ()
+\item 
+bool \hyperlink{classScribbleArea_a9496b9970942db6abfea836e6bf56ee4}{saveImage} (const QString \&fileName, const char $\ast$fileFormat)
+\item 
+void \hyperlink{classScribbleArea_a7ad908197d1fba9479da2b88d898ed42}{setPenColor} (const QColor \&newColor)
+\item 
+void \hyperlink{classScribbleArea_a3d9093f87987c3123744605a7a2cf15e}{setPenWidth} (int newWidth)
+\item 
+QColor \hyperlink{classScribbleArea_a1de2530671bd6d575a1499892e877990}{penColor} () const 
+\item 
+int \hyperlink{classScribbleArea_a2d1b263e57b70bf645934a1ac2f4e29f}{penWidth} () const 
+\item 
+void \hyperlink{classScribbleArea_a9b44c977dcec2287054f880e410980df}{nextPage} ()
+\item 
+void \hyperlink{classScribbleArea_a750efd0b17aaab32304ef975d2fc9948}{previousPage} ()
+\item 
+void \hyperlink{classScribbleArea_a6f0205b4160951f7efef3bc0741eee24}{undo} ()
+\item 
+void \hyperlink{classScribbleArea_a765af373a01bba4ddb8ff9cda8af7a10}{redo} ()
+\item 
+void \hyperlink{classScribbleArea_ad50fa04c77c2caea001b5a08799174fc}{write} ()
+\item 
+void \hyperlink{classScribbleArea_a33796ff14c3f79bb51e1a19e74ffc384}{erase} ()
+\item 
+void \hyperlink{classScribbleArea_a78dbfd362afddb2bf4e91fbc14ff8f9e}{clearAll} ()
+\item 
+void \hyperlink{classScribbleArea_a5c5e5eee9a891bc7b6fc107bd1d356cb}{screenPressEvent} (\hyperlink{classPoint}{Point} $\ast$point)
+\item 
+void \hyperlink{classScribbleArea_a457cc291cee3a2d59069bc81caf95e24}{screenMoveEvent} (\hyperlink{classPoint}{Point} $\ast$point)
+\item 
+void \hyperlink{classScribbleArea_a8fe830a4895773885bb2ed65dda875f5}{screenReleaseEvent} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classScribbleArea_a126a30e3659f6c1cdc202f10fce7e5d9}{paintEvent} (QPaintEvent $\ast$event)
+\item 
+void \hyperlink{classScribbleArea_aaf6be24625a5f0fe1e4a3b8eecb07575}{resizeEvent} (QResizeEvent $\ast$event)
+\end{DoxyCompactItemize}
+\subsection*{Private Slots}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classScribbleArea_ab51bbcc058022cbca00a0edfa724c0d3}{myUpdate} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classScribbleArea_ad5504d85e087b341d914b322088fecf5}{drawLineTo} (const \hyperlink{classPoint}{Point} endPoint)
+\item 
+void \hyperlink{classScribbleArea_af968a1bb4a81acf6a2462fd3ecb7c725}{resizeImage} (QImage $\ast$\hyperlink{classScribbleArea_ae55058216a87aeee72bcb1220bc3a89d}{image}, const QSize \&newSize)
+\item 
+void \hyperlink{classScribbleArea_a55407f71c765397a12d7efed18790c4b}{updatePageContent} ()
+\item 
+void \hyperlink{classScribbleArea_acab809a6b738076b7011373b4230cc36}{erasePath} (\hyperlink{classPoint}{Point} $\ast$point)
+\item 
+void \hyperlink{classScribbleArea_a4d7448dd926c6fdb7bf1912b81d667e8}{updatePDF} ()
+\item 
+int \hyperlink{classScribbleArea_a96f69face188f2138752600dd7ed0946}{loadPDF\_\-withPagesCount} ()
+\item 
+void \hyperlink{classScribbleArea_a898d76738b51ed00fbb3aeed87ca1ce4}{changePage} ()
+\item 
+void \hyperlink{classScribbleArea_affc463bc10a01e700e8bce98f83ea0c4}{cleanRedoVector} ()
+\item 
+void \hyperlink{classScribbleArea_aab4bb1eafc6af60c8c0e2127811c762f}{cleanPathsOnCurentPageVector} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$ \hyperlink{classScribbleArea_a5e555edb58a131ec02ea120bf4c8fd27}{DOC\_\-PATH}
+\item 
+bool \hyperlink{classScribbleArea_a3276ab91c9ab798edb920ec557a1775f}{modified}
+\item 
+bool \hyperlink{classScribbleArea_a457d8a9f83168cca50ed05675a086be3}{scribbling}
+\item 
+int \hyperlink{classScribbleArea_aa58c13c61afb70d698e44e9d849aa5ff}{myPenWidth}
+\item 
+QColor \hyperlink{classScribbleArea_a1f78169e565db8c4398974a48cc5ce7f}{myPenColor}
+\item 
+int \hyperlink{classScribbleArea_acca7f35976c146f050a05c6d31ee69f8}{WriteEraseMode}
+\item 
+int \hyperlink{classScribbleArea_aeb25d61ec956c4e0be05047c14491923}{currentPage}
+\item 
+QImage \hyperlink{classScribbleArea_ae55058216a87aeee72bcb1220bc3a89d}{image}
+\item 
+QImage \hyperlink{classScribbleArea_a00ee4e87a1a3e84656431248e38a93ec}{imageCopy}
+\item 
+\hyperlink{classPoint}{Point} \hyperlink{classScribbleArea_ac8ca5d7e5cdf01f9a5f5e04f113b36c5}{lastPoint}
+\item 
+int \hyperlink{classScribbleArea_aa4969a32252451bd4f51c4a56d07b719}{totalPages}
+\item 
+std::vector$<$ std::vector$<$ \hyperlink{classPath}{Path} $\ast$ $>$ $>$ \hyperlink{classScribbleArea_a942535e8baea0af4d05586670936b4bf}{pathsOnPage}
+\item 
+std::vector$<$ std::vector$<$ \hyperlink{classPath}{Path} $\ast$ $>$ $>$ \hyperlink{classScribbleArea_afe1dee6ab3f71d667010f85e38453ce7}{redoVector}
+\item 
+std::vector$<$ int $>$ \hyperlink{classScribbleArea_ac3830c66e5df84edb033843de2ea077b}{Paths\_\-IDs}
+\item 
+\hyperlink{classPath}{Path} $\ast$ \hyperlink{classScribbleArea_aad0cb58d4b1bd5f1e2c78854b181dbba}{mTempPath}
+\item 
+Poppler::Document $\ast$ \hyperlink{classScribbleArea_a5b8a8e5a70cde0078bb60fad3483e54f}{document}
+\item 
+Poppler::Page $\ast$ \hyperlink{classScribbleArea_a60a162ac373cf5584f37c64d1189fbd4}{pdfPage}
+\item 
+QMutex \hyperlink{classScribbleArea_ad4287ecc62db3677487e666cfa669a63}{lockForImage}
+\item 
+QTimer $\ast$ \hyperlink{classScribbleArea_acc356bd79ca5a2ffbd1cf0aebac58ec0}{updateTimer}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classScribbleArea_a3560f2a44b46531591a1f4b1e42ea86f}{
+\index{ScribbleArea@{ScribbleArea}!ScribbleArea@{ScribbleArea}}
+\index{ScribbleArea@{ScribbleArea}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{ScribbleArea}]{\setlength{\rightskip}{0pt plus 5cm}ScribbleArea::ScribbleArea (QWidget $\ast$ {\em parent} = {\ttfamily 0})}}
+\label{classScribbleArea_a3560f2a44b46531591a1f4b1e42ea86f}
+Default constructor 
+\begin{DoxyParams}{Parameters}
+\item[{\em $\ast$parent}]A pointer to a QWidget parent object\end{DoxyParams}
+Initializes the \hyperlink{classScribbleArea}{ScribbleArea} object \hypertarget{classScribbleArea_a5067be9932626a2ea5d041cb0f53a070}{
+\index{ScribbleArea@{ScribbleArea}!$\sim$ScribbleArea@{$\sim$ScribbleArea}}
+\index{$\sim$ScribbleArea@{$\sim$ScribbleArea}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{$\sim$ScribbleArea}]{\setlength{\rightskip}{0pt plus 5cm}ScribbleArea::$\sim$ScribbleArea ()\hspace{0.3cm}{\ttfamily  \mbox{[}virtual\mbox{]}}}}
+\label{classScribbleArea_a5067be9932626a2ea5d041cb0f53a070}
+Default destructor
+
+Deletes document and pdfPage 
+
+\subsection{Member Function Documentation}
+\hypertarget{classScribbleArea_a898d76738b51ed00fbb3aeed87ca1ce4}{
+\index{ScribbleArea@{ScribbleArea}!changePage@{changePage}}
+\index{changePage@{changePage}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{changePage}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::changePage ()\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_a898d76738b51ed00fbb3aeed87ca1ce4}
+Change Page
+
+This function load the new page of the PDF. The page loaded correspond to the integer in the currentPage variable. \hypertarget{classScribbleArea_aab4bb1eafc6af60c8c0e2127811c762f}{
+\index{ScribbleArea@{ScribbleArea}!cleanPathsOnCurentPageVector@{cleanPathsOnCurentPageVector}}
+\index{cleanPathsOnCurentPageVector@{cleanPathsOnCurentPageVector}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{cleanPathsOnCurentPageVector}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::cleanPathsOnCurentPageVector ()\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_aab4bb1eafc6af60c8c0e2127811c762f}
+Clean PathOnPageVector (Delete all objects)
+
+This functions cleans all the path object present in the vector. Since the \hyperlink{classPoint}{Point} objects are shared it makes sure that it is deleted only once \hypertarget{classScribbleArea_affc463bc10a01e700e8bce98f83ea0c4}{
+\index{ScribbleArea@{ScribbleArea}!cleanRedoVector@{cleanRedoVector}}
+\index{cleanRedoVector@{cleanRedoVector}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{cleanRedoVector}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::cleanRedoVector ()\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_affc463bc10a01e700e8bce98f83ea0c4}
+Clean Redo Vector (Delete all objects)
+
+This function iterates through the Redo vector, compares all paths to the paths in PathOnPages vector while deleting only the points that are only present in the Redo vector. Otherwise the vector of points is cleared and then the \hyperlink{classPath}{Path} object deleted \hypertarget{classScribbleArea_a78dbfd362afddb2bf4e91fbc14ff8f9e}{
+\index{ScribbleArea@{ScribbleArea}!clearAll@{clearAll}}
+\index{clearAll@{clearAll}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{clearAll}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::clearAll ()}}
+\label{classScribbleArea_a78dbfd362afddb2bf4e91fbc14ff8f9e}
+Clear all
+
+This function clears the current page from all writing. This action {\bfseries cannot} be undone. \hypertarget{classScribbleArea_ad5504d85e087b341d914b322088fecf5}{
+\index{ScribbleArea@{ScribbleArea}!drawLineTo@{drawLineTo}}
+\index{drawLineTo@{drawLineTo}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{drawLineTo}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::drawLineTo (const {\bf Point} {\em endPoint})\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_ad5504d85e087b341d914b322088fecf5}
+Draw line between two points
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em \&endPoint}]A \hyperlink{classPoint}{Point} representing the point to which a line needs to be drawn\end{DoxyParams}
+This function will draw a line between a previous point, which needs to be initialized on Screen Touch Event, and the current point. \hypertarget{classScribbleArea_a33796ff14c3f79bb51e1a19e74ffc384}{
+\index{ScribbleArea@{ScribbleArea}!erase@{erase}}
+\index{erase@{erase}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{erase}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::erase ()}}
+\label{classScribbleArea_a33796ff14c3f79bb51e1a19e74ffc384}
+Set erase mode
+
+This function set the mode to erase, allowing the user to erase anything that has been written on top of the PDF, leaving the PDF intact \hypertarget{classScribbleArea_acab809a6b738076b7011373b4230cc36}{
+\index{ScribbleArea@{ScribbleArea}!erasePath@{erasePath}}
+\index{erasePath@{erasePath}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{erasePath}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::erasePath ({\bf Point} $\ast$ {\em point})\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_acab809a6b738076b7011373b4230cc36}
+Erase \hyperlink{classPath}{Path}
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em $\ast$point}]A pointer to a \hyperlink{classPoint}{Point} object\end{DoxyParams}
+This function iterates through all the paths on the current page and compares all their points to the newly press point. If any point of a path is deltaX and deltaY (small number, a few pixels) away from the pressed point that path is set to Erase and will not no longer be shown \hypertarget{classScribbleArea_a96f69face188f2138752600dd7ed0946}{
+\index{ScribbleArea@{ScribbleArea}!loadPDF\_\-withPagesCount@{loadPDF\_\-withPagesCount}}
+\index{loadPDF\_\-withPagesCount@{loadPDF\_\-withPagesCount}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{loadPDF\_\-withPagesCount}]{\setlength{\rightskip}{0pt plus 5cm}int ScribbleArea::loadPDF\_\-withPagesCount ()\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_a96f69face188f2138752600dd7ed0946}
+Load the PDF and return the number of pages
+
+\begin{DoxyReturn}{Returns}
+{\itshape Number of pages\/} -\/ The number of pages in the PDF document
+\end{DoxyReturn}
+This function loads the PDF document making it available to the scribbleArea and returns the number of pages the document contains.
+
+This function should be {\bfseries called only once} since it creates a pointer to the document and calling this function will create memory leaks unless the document is deleted first \hypertarget{classScribbleArea_ab51bbcc058022cbca00a0edfa724c0d3}{
+\index{ScribbleArea@{ScribbleArea}!myUpdate@{myUpdate}}
+\index{myUpdate@{myUpdate}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{myUpdate}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::myUpdate ()\hspace{0.3cm}{\ttfamily  \mbox{[}private, slot\mbox{]}}}}
+\label{classScribbleArea_ab51bbcc058022cbca00a0edfa724c0d3}
+Screen update function
+
+This function is called periodically, each SCREEN\_\-UPDATE milliseconds (in the range of 30 milliseconds, defined in define.h). It will call the update() function only only if the screen content has changed since last update. \hypertarget{classScribbleArea_a9b44c977dcec2287054f880e410980df}{
+\index{ScribbleArea@{ScribbleArea}!nextPage@{nextPage}}
+\index{nextPage@{nextPage}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{nextPage}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::nextPage ()}}
+\label{classScribbleArea_a9b44c977dcec2287054f880e410980df}
+Next Page
+
+This function tries, if available, to access the next page of the PDF \hypertarget{classScribbleArea_a126a30e3659f6c1cdc202f10fce7e5d9}{
+\index{ScribbleArea@{ScribbleArea}!paintEvent@{paintEvent}}
+\index{paintEvent@{paintEvent}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{paintEvent}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::paintEvent (QPaintEvent $\ast$ {\em event})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classScribbleArea_a126a30e3659f6c1cdc202f10fce7e5d9}
+Paint event
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em $\ast$event}]A QPaintEvent representing a paint event\end{DoxyParams}
+This function renders the screen whenever a QPaintEvent occurs. \hypertarget{classScribbleArea_a1de2530671bd6d575a1499892e877990}{
+\index{ScribbleArea@{ScribbleArea}!penColor@{penColor}}
+\index{penColor@{penColor}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{penColor}]{\setlength{\rightskip}{0pt plus 5cm}QColor ScribbleArea::penColor () const}}
+\label{classScribbleArea_a1de2530671bd6d575a1499892e877990}
+Get Pen Color
+
+\begin{DoxyReturn}{Returns}
+{\itshape myPenColor\/} -\/ A QColor representing the current pen color in use
+\end{DoxyReturn}
+This function returns the pen color currently in use \hypertarget{classScribbleArea_a2d1b263e57b70bf645934a1ac2f4e29f}{
+\index{ScribbleArea@{ScribbleArea}!penWidth@{penWidth}}
+\index{penWidth@{penWidth}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{penWidth}]{\setlength{\rightskip}{0pt plus 5cm}int ScribbleArea::penWidth () const}}
+\label{classScribbleArea_a2d1b263e57b70bf645934a1ac2f4e29f}
+Get Pen Width
+
+\begin{DoxyReturn}{Returns}
+{\itshape myPenWidth\/} -\/ An integer representing the width of the pen in use
+\end{DoxyReturn}
+This function returns the pen width currently in use \hypertarget{classScribbleArea_a750efd0b17aaab32304ef975d2fc9948}{
+\index{ScribbleArea@{ScribbleArea}!previousPage@{previousPage}}
+\index{previousPage@{previousPage}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{previousPage}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::previousPage ()}}
+\label{classScribbleArea_a750efd0b17aaab32304ef975d2fc9948}
+Previous Page
+
+This function tries, if available, to access the previous page of the PDF \hypertarget{classScribbleArea_a765af373a01bba4ddb8ff9cda8af7a10}{
+\index{ScribbleArea@{ScribbleArea}!redo@{redo}}
+\index{redo@{redo}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{redo}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::redo ()}}
+\label{classScribbleArea_a765af373a01bba4ddb8ff9cda8af7a10}
+Redo
+
+This function allows the user to redo the last undone actions. This action is only available if the last action(s) is an undo, otherwise this function will have no effect \hypertarget{classScribbleArea_aaf6be24625a5f0fe1e4a3b8eecb07575}{
+\index{ScribbleArea@{ScribbleArea}!resizeEvent@{resizeEvent}}
+\index{resizeEvent@{resizeEvent}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{resizeEvent}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::resizeEvent (QResizeEvent $\ast$ {\em event})\hspace{0.3cm}{\ttfamily  \mbox{[}protected\mbox{]}}}}
+\label{classScribbleArea_aaf6be24625a5f0fe1e4a3b8eecb07575}
+Resize event
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em $\ast$event}]A QResizeEvent representing the resize event\end{DoxyParams}
+This function is called each time the window is resized. \hypertarget{classScribbleArea_af968a1bb4a81acf6a2462fd3ecb7c725}{
+\index{ScribbleArea@{ScribbleArea}!resizeImage@{resizeImage}}
+\index{resizeImage@{resizeImage}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{resizeImage}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::resizeImage (QImage $\ast$ {\em image}, \/  const QSize \& {\em newSize})\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_af968a1bb4a81acf6a2462fd3ecb7c725}
+Resize a image to the required parameters
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em $\ast$image}]A pointer to a QImage \item[{\em \&newSize}]A reference to a QSize\end{DoxyParams}
+This function will take the passed image and resize it correspondingly to the QSize give \hypertarget{classScribbleArea_a9496b9970942db6abfea836e6bf56ee4}{
+\index{ScribbleArea@{ScribbleArea}!saveImage@{saveImage}}
+\index{saveImage@{saveImage}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{saveImage}]{\setlength{\rightskip}{0pt plus 5cm}bool ScribbleArea::saveImage (const QString \& {\em fileName}, \/  const char $\ast$ {\em fileFormat})}}
+\label{classScribbleArea_a9496b9970942db6abfea836e6bf56ee4}
+Save image
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em \&fileName}]The filename under which the image should be saved \item[{\em $\ast$fileFormat}]The file format in which the image should be saved\end{DoxyParams}
+This function save the current viewed image as a image file. \hypertarget{classScribbleArea_a457cc291cee3a2d59069bc81caf95e24}{
+\index{ScribbleArea@{ScribbleArea}!screenMoveEvent@{screenMoveEvent}}
+\index{screenMoveEvent@{screenMoveEvent}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{screenMoveEvent}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::screenMoveEvent ({\bf Point} $\ast$ {\em point})}}
+\label{classScribbleArea_a457cc291cee3a2d59069bc81caf95e24}
+Screen Move Event
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em $\ast$point}]A pointer to a \hyperlink{classPoint}{Point} object\end{DoxyParams}
+This function draws a line between a last point and the new point in Write mode or tries to delete a path on which the point passes through in Erase mode \hypertarget{classScribbleArea_a5c5e5eee9a891bc7b6fc107bd1d356cb}{
+\index{ScribbleArea@{ScribbleArea}!screenPressEvent@{screenPressEvent}}
+\index{screenPressEvent@{screenPressEvent}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{screenPressEvent}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::screenPressEvent ({\bf Point} $\ast$ {\em point})}}
+\label{classScribbleArea_a5c5e5eee9a891bc7b6fc107bd1d356cb}
+Screen Press Event
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em $\ast$point}]A pointer to a \hyperlink{classPoint}{Point} object\end{DoxyParams}
+This function initializes the lastPoint and enables scribbling in Write mode, or tries to delete a path on which the point passes through in Erase mode \hypertarget{classScribbleArea_a8fe830a4895773885bb2ed65dda875f5}{
+\index{ScribbleArea@{ScribbleArea}!screenReleaseEvent@{screenReleaseEvent}}
+\index{screenReleaseEvent@{screenReleaseEvent}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{screenReleaseEvent}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::screenReleaseEvent ()}}
+\label{classScribbleArea_a8fe830a4895773885bb2ed65dda875f5}
+Screen Release Event
+
+This function disables scribbling and informs the \hyperlink{classScribbleArea}{ScribbleArea} that nothing is touching the screen anymore \hypertarget{classScribbleArea_a7ad908197d1fba9479da2b88d898ed42}{
+\index{ScribbleArea@{ScribbleArea}!setPenColor@{setPenColor}}
+\index{setPenColor@{setPenColor}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{setPenColor}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::setPenColor (const QColor \& {\em newColor})}}
+\label{classScribbleArea_a7ad908197d1fba9479da2b88d898ed42}
+Set Pen Color
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em \&newColor}]A reference to a QColor object\end{DoxyParams}
+This function sets the pen color \hypertarget{classScribbleArea_a3d9093f87987c3123744605a7a2cf15e}{
+\index{ScribbleArea@{ScribbleArea}!setPenWidth@{setPenWidth}}
+\index{setPenWidth@{setPenWidth}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{setPenWidth}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::setPenWidth (int {\em newWidth})}}
+\label{classScribbleArea_a3d9093f87987c3123744605a7a2cf15e}
+Set Pen Width
+
+
+\begin{DoxyParams}{Parameters}
+\item[{\em newWidth}]An integer representing the new width of the pen\end{DoxyParams}
+This function set the width of the pen to be used. \hypertarget{classScribbleArea_a6f0205b4160951f7efef3bc0741eee24}{
+\index{ScribbleArea@{ScribbleArea}!undo@{undo}}
+\index{undo@{undo}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{undo}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::undo ()}}
+\label{classScribbleArea_a6f0205b4160951f7efef3bc0741eee24}
+Undo
+
+This function allows the user to undo the last actions. Presently, there is no limit of now many undo can be performed, meaning the user can press undo until there is nothing present on the screen \hypertarget{classScribbleArea_a55407f71c765397a12d7efed18790c4b}{
+\index{ScribbleArea@{ScribbleArea}!updatePageContent@{updatePageContent}}
+\index{updatePageContent@{updatePageContent}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{updatePageContent}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::updatePageContent ()\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_a55407f71c765397a12d7efed18790c4b}
+Update current page content
+
+This function redraws the content of the current page. The PDF page is first loaded and then all the enabled paths \hypertarget{classScribbleArea_a4d7448dd926c6fdb7bf1912b81d667e8}{
+\index{ScribbleArea@{ScribbleArea}!updatePDF@{updatePDF}}
+\index{updatePDF@{updatePDF}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{updatePDF}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::updatePDF ()\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_a4d7448dd926c6fdb7bf1912b81d667e8}
+Update page content from a PDF
+
+This function updates the viewed content from a PDF file. \hypertarget{classScribbleArea_ad50fa04c77c2caea001b5a08799174fc}{
+\index{ScribbleArea@{ScribbleArea}!write@{write}}
+\index{write@{write}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{write}]{\setlength{\rightskip}{0pt plus 5cm}void ScribbleArea::write ()}}
+\label{classScribbleArea_ad50fa04c77c2caea001b5a08799174fc}
+Set write mode
+
+This function set the mode to write, allowing the user to write on top of the PDF 
+
+\subsection{Member Data Documentation}
+\hypertarget{classScribbleArea_aeb25d61ec956c4e0be05047c14491923}{
+\index{ScribbleArea@{ScribbleArea}!currentPage@{currentPage}}
+\index{currentPage@{currentPage}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{currentPage}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf ScribbleArea::currentPage}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_aeb25d61ec956c4e0be05047c14491923}
+\hypertarget{classScribbleArea_a5e555edb58a131ec02ea120bf4c8fd27}{
+\index{ScribbleArea@{ScribbleArea}!DOC\_\-PATH@{DOC\_\-PATH}}
+\index{DOC\_\-PATH@{DOC\_\-PATH}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{DOC\_\-PATH}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ {\bf ScribbleArea::DOC\_\-PATH}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_a5e555edb58a131ec02ea120bf4c8fd27}
+\hypertarget{classScribbleArea_a5b8a8e5a70cde0078bb60fad3483e54f}{
+\index{ScribbleArea@{ScribbleArea}!document@{document}}
+\index{document@{document}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{document}]{\setlength{\rightskip}{0pt plus 5cm}Poppler::Document$\ast$ {\bf ScribbleArea::document}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_a5b8a8e5a70cde0078bb60fad3483e54f}
+\hypertarget{classScribbleArea_ae55058216a87aeee72bcb1220bc3a89d}{
+\index{ScribbleArea@{ScribbleArea}!image@{image}}
+\index{image@{image}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{image}]{\setlength{\rightskip}{0pt plus 5cm}QImage {\bf ScribbleArea::image}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_ae55058216a87aeee72bcb1220bc3a89d}
+\hypertarget{classScribbleArea_a00ee4e87a1a3e84656431248e38a93ec}{
+\index{ScribbleArea@{ScribbleArea}!imageCopy@{imageCopy}}
+\index{imageCopy@{imageCopy}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{imageCopy}]{\setlength{\rightskip}{0pt plus 5cm}QImage {\bf ScribbleArea::imageCopy}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_a00ee4e87a1a3e84656431248e38a93ec}
+\hypertarget{classScribbleArea_ac8ca5d7e5cdf01f9a5f5e04f113b36c5}{
+\index{ScribbleArea@{ScribbleArea}!lastPoint@{lastPoint}}
+\index{lastPoint@{lastPoint}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{lastPoint}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Point} {\bf ScribbleArea::lastPoint}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_ac8ca5d7e5cdf01f9a5f5e04f113b36c5}
+\hypertarget{classScribbleArea_ad4287ecc62db3677487e666cfa669a63}{
+\index{ScribbleArea@{ScribbleArea}!lockForImage@{lockForImage}}
+\index{lockForImage@{lockForImage}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{lockForImage}]{\setlength{\rightskip}{0pt plus 5cm}QMutex {\bf ScribbleArea::lockForImage}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_ad4287ecc62db3677487e666cfa669a63}
+\hypertarget{classScribbleArea_a3276ab91c9ab798edb920ec557a1775f}{
+\index{ScribbleArea@{ScribbleArea}!modified@{modified}}
+\index{modified@{modified}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{modified}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf ScribbleArea::modified}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_a3276ab91c9ab798edb920ec557a1775f}
+\hypertarget{classScribbleArea_aad0cb58d4b1bd5f1e2c78854b181dbba}{
+\index{ScribbleArea@{ScribbleArea}!mTempPath@{mTempPath}}
+\index{mTempPath@{mTempPath}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{mTempPath}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Path}$\ast$ {\bf ScribbleArea::mTempPath}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_aad0cb58d4b1bd5f1e2c78854b181dbba}
+\hypertarget{classScribbleArea_a1f78169e565db8c4398974a48cc5ce7f}{
+\index{ScribbleArea@{ScribbleArea}!myPenColor@{myPenColor}}
+\index{myPenColor@{myPenColor}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{myPenColor}]{\setlength{\rightskip}{0pt plus 5cm}QColor {\bf ScribbleArea::myPenColor}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_a1f78169e565db8c4398974a48cc5ce7f}
+\hypertarget{classScribbleArea_aa58c13c61afb70d698e44e9d849aa5ff}{
+\index{ScribbleArea@{ScribbleArea}!myPenWidth@{myPenWidth}}
+\index{myPenWidth@{myPenWidth}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{myPenWidth}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf ScribbleArea::myPenWidth}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_aa58c13c61afb70d698e44e9d849aa5ff}
+\hypertarget{classScribbleArea_ac3830c66e5df84edb033843de2ea077b}{
+\index{ScribbleArea@{ScribbleArea}!Paths\_\-IDs@{Paths\_\-IDs}}
+\index{Paths\_\-IDs@{Paths\_\-IDs}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{Paths\_\-IDs}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$int$>$ {\bf ScribbleArea::Paths\_\-IDs}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_ac3830c66e5df84edb033843de2ea077b}
+\hypertarget{classScribbleArea_a942535e8baea0af4d05586670936b4bf}{
+\index{ScribbleArea@{ScribbleArea}!pathsOnPage@{pathsOnPage}}
+\index{pathsOnPage@{pathsOnPage}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{pathsOnPage}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$ std::vector$<${\bf Path}$\ast$$>$ $>$ {\bf ScribbleArea::pathsOnPage}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_a942535e8baea0af4d05586670936b4bf}
+\hypertarget{classScribbleArea_a60a162ac373cf5584f37c64d1189fbd4}{
+\index{ScribbleArea@{ScribbleArea}!pdfPage@{pdfPage}}
+\index{pdfPage@{pdfPage}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{pdfPage}]{\setlength{\rightskip}{0pt plus 5cm}Poppler::Page$\ast$ {\bf ScribbleArea::pdfPage}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_a60a162ac373cf5584f37c64d1189fbd4}
+\hypertarget{classScribbleArea_afe1dee6ab3f71d667010f85e38453ce7}{
+\index{ScribbleArea@{ScribbleArea}!redoVector@{redoVector}}
+\index{redoVector@{redoVector}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{redoVector}]{\setlength{\rightskip}{0pt plus 5cm}std::vector$<$ std::vector$<${\bf Path}$\ast$$>$ $>$ {\bf ScribbleArea::redoVector}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_afe1dee6ab3f71d667010f85e38453ce7}
+\hypertarget{classScribbleArea_a457d8a9f83168cca50ed05675a086be3}{
+\index{ScribbleArea@{ScribbleArea}!scribbling@{scribbling}}
+\index{scribbling@{scribbling}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{scribbling}]{\setlength{\rightskip}{0pt plus 5cm}bool {\bf ScribbleArea::scribbling}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_a457d8a9f83168cca50ed05675a086be3}
+\hypertarget{classScribbleArea_aa4969a32252451bd4f51c4a56d07b719}{
+\index{ScribbleArea@{ScribbleArea}!totalPages@{totalPages}}
+\index{totalPages@{totalPages}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{totalPages}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf ScribbleArea::totalPages}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_aa4969a32252451bd4f51c4a56d07b719}
+\hypertarget{classScribbleArea_acc356bd79ca5a2ffbd1cf0aebac58ec0}{
+\index{ScribbleArea@{ScribbleArea}!updateTimer@{updateTimer}}
+\index{updateTimer@{updateTimer}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{updateTimer}]{\setlength{\rightskip}{0pt plus 5cm}QTimer$\ast$ {\bf ScribbleArea::updateTimer}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_acc356bd79ca5a2ffbd1cf0aebac58ec0}
+\hypertarget{classScribbleArea_acca7f35976c146f050a05c6d31ee69f8}{
+\index{ScribbleArea@{ScribbleArea}!WriteEraseMode@{WriteEraseMode}}
+\index{WriteEraseMode@{WriteEraseMode}!ScribbleArea@{ScribbleArea}}
+\subsubsection[{WriteEraseMode}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf ScribbleArea::WriteEraseMode}\hspace{0.3cm}{\ttfamily  \mbox{[}private\mbox{]}}}}
+\label{classScribbleArea_acca7f35976c146f050a05c6d31ee69f8}
+
+
+The documentation for this class was generated from the following files:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{scribblearea_8h}{scribblearea.h}\item 
+\hyperlink{scribblearea_8cpp}{scribblearea.cpp}\end{DoxyCompactItemize}
