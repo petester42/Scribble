@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'scribblearea.h'
 **
-** Created: Wed Oct 24 14:41:51 2012
+** Created: Fri Oct 26 16:46:59 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
 **
 ** WARNING! All changes made in this file will be lost!

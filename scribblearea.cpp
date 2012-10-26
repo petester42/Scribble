@@ -45,7 +45,7 @@ ScribbleArea::ScribbleArea(QWidget *parent)
     updatePathVector->start(UPDATE_PATHS_VECTOR);
 
     updateImage = true;
-    sendPacket();
+    //sendPacket();
 }
 
 /*! Default destructor
