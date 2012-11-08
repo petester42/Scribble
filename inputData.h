@@ -18,18 +18,18 @@
 #include <stdio.h>   /* Standard input/output definitions */
 #include <unistd.h>  /* UNIX standard function definitions */
 #include <queue>
-#include <QThread>
-#include "QQueue"
-#include "scribblearea.h"
+#include "ScribbleArea.h"
 #include <stdlib.h>     /* Needed for the exit() function */
 
 #include "PalmRejection.h"
 
-class inputData : public QThread
+using namespace std;
+
+class InputData
 {
 public:
-    inputData(ScribbleArea *);
-    ~inputData();
+    InputData(ScribbleArea *);
+    ~InputData();
     void run();
     void stop();
 
@@ -38,7 +38,7 @@ private:
     int open_port();
     Point * read_data_from_file(int fd);
     ScribbleArea * scribbleAreaAccess;
-    QQueue<Point* > *mPointsQueue;
+    queue<Point* > *mPointsQueue;
 
     volatile bool stop_request;
     //int fd;
@@ -51,4 +51,3 @@ private:
 };
 
 #endif	/* INPUTDATA_H */
-

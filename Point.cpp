@@ -8,6 +8,7 @@
 #include <sstream>
 
 #include "Point.h"
+#include "Color.h"
 
 /*! Default constructor
  * \param Column An integer representing the column in which the point exists
@@ -17,8 +18,15 @@
  * 
  * This is the default constructor of the point object. 
  */
-Point::Point(int Column, int Row, int x, int y) : QPoint(WIDTH-x-15,y-21), column(Column), row(Row)
+Point::Point(int column_, int row_, int x_, int y_)
 {
+    //x(WIDTH-x-15), y(y-21), column(Column), row(Row
+    
+    x = WIDTH-x_-15;
+    y = y_-15;
+    column = column_;
+    row = row_;
+    
 //    /WIDTH-QPoint::y()-10;
     //For testing purpose
     //printf(" Added point: %x, %x, %x, %x", this->column, this->row, this->x(), this->y());
@@ -30,7 +38,7 @@ Point::Point(int Column, int Row, int x, int y) : QPoint(WIDTH-x-15,y-21), colum
  * 
  * This is a copy constructor. It takes an Point object and creates an exact copy of it
  */
-Point::Point(const Point& orig) : QPoint(orig), column(orig.column), row(orig.row)   //orig.x(), orig.y()
+Point::Point(const Point& orig) : x(orig.x), y(orig.y), column(orig.column), row(orig.row)   //orig.x(), orig.y()
 {
 
 }
@@ -39,7 +47,7 @@ Point::Point(const Point& orig) : QPoint(orig), column(orig.column), row(orig.ro
  * 
  * This constructor is needed because ??????????????????????????
  */
-Point::Point() : QPoint(0,0),column(0), row(0)
+Point::Point() : x(0), y(0),column(0), row(0)
 {
 
 }
@@ -72,10 +80,26 @@ int Point::getRow() const
     return row;
 }
 
+int Point::getX() {
+    return x;
+}
+
+int Point::getY(){
+    return y;
+}
+
+void Point::setX(int x_) {
+    x = x_;
+}
+
+void Point::setY(int y_){
+    y = y_;
+}
+
 void Point::adjustForSaving()
 {
     //819, 1092
     //768, 1024
-    setX((x()-33)*819/WIDTH);
-    setY((y()-33)*1092/HEIGHT);
+    x = ((x-33)*819/WIDTH);
+    y = ((y-33)*1092/HEIGHT);
 }

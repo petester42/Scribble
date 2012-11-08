@@ -24,7 +24,7 @@ ScreenAreas::ScreenAreas()
  */
 ScreenAreas::ScreenAreas(const ScreenAreas& orig)
 {
-    for ( int i = 0; i < N_ROW; i++ )
+    for (int i = 0; i < N_ROW; i++)
     {
         R[i] = orig.R[i];
     }
@@ -40,7 +40,7 @@ ScreenAreas::~ScreenAreas()
  */
 void ScreenAreas::clearMatrix()
 {
-    for ( int i = 0; i < N_ROW; i++ )
+    for (int i = 0; i < N_ROW; i++)
     {
         R[i] = 0;
     }
@@ -58,11 +58,11 @@ void ScreenAreas::clearMatrix()
  */
 bool ScreenAreas::set(int Column, int Row)
 {
-    if ( ( Column < 0 ) || ( Column >= N_COLUMN ) || ( Row < 0 ) || ( Row >= N_ROW ) )
+    if ((Column < 0) || (Column >= N_COLUMN) || (Row < 0) || (Row >= N_ROW))
     {
         return false;
     }
-    R[Row] = R[Row] | ( 1 << Column );
+    R[Row] = R[Row] | (1 << Column);
 
     return true;
 }
@@ -77,11 +77,11 @@ bool ScreenAreas::set(int Column, int Row)
  */
 bool ScreenAreas::reset(int Column, int Row)
 {
-    if ( ( Column < 0 ) || ( Column >= N_COLUMN ) || ( Row < 0 ) || ( Row >= N_ROW ) )
+    if ((Column < 0) || (Column >= N_COLUMN) || (Row < 0) || (Row >= N_ROW))
     {
         return false;
     }
-    R[Row] = R[Row]&~( 1 << Column );
+    R[Row] = R[Row]&~(1 << Column);
     return true;
 
 }
@@ -97,12 +97,12 @@ bool ScreenAreas::reset(int Column, int Row)
  */
 bool ScreenAreas::isSet(int Column, int Row)
 {
-    if ( ( Column < 0 ) || ( Column >= N_COLUMN ) || ( Row < 0 ) || ( Row >= N_ROW ) )
+    if ((Column < 0) || (Column >= N_COLUMN) || (Row < 0) || (Row >= N_ROW))
     {
         return false;
     }
 
-    return R[Row] & ( 1 << Column );
+    return R[Row] & (1 << Column);
 }
 
 /** Determines if there is at least one bit set on the whole matrix
@@ -113,9 +113,9 @@ bool ScreenAreas::isSet(int Column, int Row)
  */
 bool ScreenAreas::isSet()
 {
-    for ( int i = 0; i < N_ROW; i++ )
+    for (int i = 0; i < N_ROW; i++)
     {
-        if ( R[i] > 0 )
+        if (R[i] > 0)
         {
             return true;
         }
@@ -136,10 +136,12 @@ bool ScreenAreas::isSet()
  */
 bool ScreenAreas::setArea(int Column, int Row)
 {
-    if ( ( Column < 0 ) || ( Column >= N_COLUMN ) || ( Row < 0 ) || ( Row >= N_ROW ) )
+
+    if ((Column < 0) || (Column >= N_COLUMN) || (Row < 0) || (Row >= N_ROW))
     {
         return false;
     }
+
 
     /* Ideal condition. 
      * takes care of all 0
@@ -153,11 +155,11 @@ bool ScreenAreas::setArea(int Column, int Row)
      *          ----------
      * 
      */
-    if ( ( Column > 0 ) && ( Column < N_COLUMN - 1 ) && ( Row > 0 ) && ( Row < N_ROW - 1 ) )
+    if ((Column > 0) && (Column < N_COLUMN - 1) && (Row > 0) && (Row < N_ROW - 1))
     {
-        R[Row - 1] = R[Row - 1] | ( 7 << ( Column - 1 ) );
-        R[Row] = R[Row] | ( 7 << ( Column - 1 ) );
-        R[Row + 1] = R[Row + 1] | ( 7 << ( Column - 1 ) );
+        R[Row - 1] = R[Row - 1] | (7 << (Column - 1));
+        R[Row] = R[Row] | (7 << (Column - 1));
+        R[Row + 1] = R[Row + 1] | (7 << (Column - 1));
 
         return true;
     }
@@ -172,11 +174,11 @@ bool ScreenAreas::setArea(int Column, int Row)
          *          ----------
          * 
          */
-    else if ( Column == 0 && Row != 0 && Row != ( N_ROW - 1 ) )
+    else if (Column == 0 && Row != 0 && Row != (N_ROW - 1))
     {
-        R[Row - 1] = R[Row - 1] | ( 3 << Column );
-        R[Row] = R[Row] | ( 3 << Column );
-        R[Row + 1] = R[Row + 1] | ( 3 << Column );
+        R[Row - 1] = R[Row - 1] | (3 << Column);
+        R[Row] = R[Row] | (3 << Column);
+        R[Row + 1] = R[Row + 1] | (3 << Column);
 
         return true;
     }
@@ -191,12 +193,11 @@ bool ScreenAreas::setArea(int Column, int Row)
          *          ----------
          * 
          */
-    else if ( Column == ( N_COLUMN - 1 ) && Row != 0 && Row != ( N_ROW - 1 ) )
+    else if (Column == (N_COLUMN - 1) && Row != 0 && Row != (N_ROW - 1))
     {
-        //Need to fully test
-        R[Row - 1] = R[Row - 1] | ( 3 << ( Column - 1 ) );
-        R[Row] = R[Row] | ( 3 << ( Column - 1 ) );
-        R[Row + 1] = R[Row + 1] | ( 3 << ( Column - 1 ) );
+        R[Row - 1] = R[Row - 1] | (3 << (Column - 1));
+        R[Row] = R[Row] | (3 << (Column - 1));
+        R[Row + 1] = R[Row + 1] | (3 << (Column - 1));
 
         return true;
     }
@@ -211,11 +212,10 @@ bool ScreenAreas::setArea(int Column, int Row)
          *          ----------
          * 
          */
-    else if ( Row == 0 && Column != 0 && Column != ( N_COLUMN - 1 ) )
+    else if (Row == 0 && Column != 0 && Column != (N_COLUMN - 1))
     {
-        R[Row] = R[Row] | ( 3 << Column );
-        R[Row + 1] = R[Row + 1] | ( 3 << Column );
-        R[N_ROW - 1] = R[N_ROW - 1] | ( 3 << Column );
+        R[Row] = R[Row] | (3 << Column);
+        R[Row + 1] = R[Row + 1] | (3 << Column);
 
         return true;
     }
@@ -229,10 +229,10 @@ bool ScreenAreas::setArea(int Column, int Row)
          *          ----------
          *          -00000000-         
          */
-    else if ( Row == ( N_ROW - 1 ) && Column != 0 && Column != ( N_COLUMN - 1 ) )
+    else if (Row == (N_ROW - 1) && Column != 0 && Column != (N_COLUMN - 1))
     {
-        R[Row - 1] = R[Row - 1] | ( 7 << ( Column - 1 ) );
-        R[Row] = R[Row] | ( 7 << ( Column - 1 ) );
+        R[Row - 1] = R[Row - 1] | (7 << (Column - 1));
+        R[Row] = R[Row] | (7 << (Column - 1));
 
         return true;
     }
@@ -246,11 +246,10 @@ bool ScreenAreas::setArea(int Column, int Row)
          *          ----------
          *          ----------  
          */
-    else if ( Column == 0 && Row == 0 )
+    else if (Column == 0 && Row == 0)
     {
-        R[Row] = R[Row] | ( 3 << Column );
-        R[Row + 1] = R[Row + 1] | ( 3 << Column );
-        R[N_ROW - 1] = R[N_ROW - 1] | ( 3 << Column );
+        R[Row] = R[Row] | (3 << Column);
+        R[Row + 1] = R[Row + 1] | (3 << Column);
 
         return true;
     }
@@ -264,11 +263,10 @@ bool ScreenAreas::setArea(int Column, int Row)
          *          ----------
          *          ----------  
          */
-    else if ( Column == ( N_COLUMN - 1 ) && Row == 0 )
+    else if (Column == (N_COLUMN - 1) && Row == 0)
     {
-        R[Row] = R[Row] | ( 3 << ( Column - 1 ) );
-        R[Row + 1] = R[Row + 1] | ( 3 << ( Column - 1 ) );
-        R[N_ROW - 1] = R[N_ROW - 1] | ( 3 << Column );
+        R[Row] = R[Row] | (3 << (Column - 1));
+        R[Row + 1] = R[Row + 1] | (3 << (Column - 1));
 
         return true;
     }
@@ -282,10 +280,10 @@ bool ScreenAreas::setArea(int Column, int Row)
          *          ----------
          *          0---------  
          */
-    else if ( Column == 0 && Row == ( N_ROW - 1 ) )
+    else if (Column == 0 && Row == (N_ROW - 1))
     {
-        R[Row - 1] = R[Row - 1] | ( 3 << Column );
-        R[Row] = R[Row] | ( 3 << Column );
+        R[Row - 1] = R[Row - 1] | (3 << Column);
+        R[Row] = R[Row] | (3 << Column);
 
         return true;
     }
@@ -299,10 +297,11 @@ bool ScreenAreas::setArea(int Column, int Row)
          *          ----------
          *          ---------0  
          */
-    else if ( Column == ( N_COLUMN - 1 ) && Row == ( N_ROW - 1 ) )
+    else if (Column == (N_COLUMN - 1) && Row == (N_ROW - 1))
     {
-        R[Row - 1] = R[Row - 1] | ( 3 << ( Column - 1 ) );
-        R[Row] = R[Row] | ( 3 << ( Column - 1 ) );
+        R[Row - 1] = R[Row - 1] | (3 << (Column - 1));
+        R[Row] = R[Row] | (3 << (Column - 1));
+
         return true;
     }
 
@@ -322,7 +321,7 @@ bool ScreenAreas::setArea(int Column, int Row)
  */
 bool ScreenAreas::resetArea(int Column, int Row)
 {
-    if ( ( Column < 0 ) || ( Column >= N_COLUMN ) || ( Row < 0 ) || ( Row >= N_ROW ) )
+    if ((Column < 0) || (Column >= N_COLUMN) || (Row < 0) || (Row >= N_ROW))
     {
         return false;
     }
@@ -340,11 +339,11 @@ bool ScreenAreas::resetArea(int Column, int Row)
      *          ----------
      * 
      */
-    if ( ( Column > 0 ) && ( Column < N_COLUMN - 1 ) && ( Row > 0 ) && ( Row < N_ROW - 1 ) )
+    if ((Column > 0) && (Column < N_COLUMN - 1) && (Row > 0) && (Row < N_ROW - 1))
     {
-        R[Row - 1] = R[Row - 1] &~( 7 << ( Column - 1 ) );
-        R[Row] = R[Row] &~( 7 << ( Column - 1 ) );
-        R[Row + 1] = R[Row + 1] &~( 7 << ( Column - 1 ) );
+        R[Row - 1] = R[Row - 1] &~(7 << (Column - 1));
+        R[Row] = R[Row] &~(7 << (Column - 1));
+        R[Row + 1] = R[Row + 1] &~(7 << (Column - 1));
 
         return true;
     }
@@ -359,11 +358,11 @@ bool ScreenAreas::resetArea(int Column, int Row)
          *          ----------
          * 
          */
-    else if ( Column == 0 && Row != 0 && Row != ( N_ROW - 1 ) )
+    else if (Column == 0 && Row != 0 && Row != (N_ROW - 1))
     {
-        R[Row - 1] = R[Row - 1] &~( 3 << Column );
-        R[Row] = R[Row] &~( 3 << Column );
-        R[Row + 1] = R[Row + 1] &~( 3 << Column );
+        R[Row - 1] = R[Row - 1] &~(3 << Column);
+        R[Row] = R[Row] &~(3 << Column);
+        R[Row + 1] = R[Row + 1] &~(3 << Column);
 
         return true;
     }
@@ -378,11 +377,11 @@ bool ScreenAreas::resetArea(int Column, int Row)
          *          ----------
          * 
          */
-    else if ( Column == ( N_COLUMN - 1 ) && Row != 0 && Row != ( N_ROW - 1 ) )
+    else if (Column == (N_COLUMN - 1) && Row != 0 && Row != (N_ROW - 1))
     {
-        R[Row - 1] = R[Row - 1] &~( 3 << ( Column - 1 ) );
-        R[Row] = R[Row] &~( 3 << ( Column - 1 ) );
-        R[Row + 1] = R[Row + 1] &~( 3 << ( Column - 1 ) );
+        R[Row - 1] = R[Row - 1] &~(3 << (Column - 1));
+        R[Row] = R[Row] &~(3 << (Column - 1));
+        R[Row + 1] = R[Row + 1] &~(3 << (Column - 1));
 
         return true;
     }
@@ -397,10 +396,10 @@ bool ScreenAreas::resetArea(int Column, int Row)
          *          ----------
          * 
          */
-    else if ( Row == 0 && Column != 0 && Column != ( N_COLUMN - 1 ) )
+    else if (Row == 0 && Column != 0 && Column != (N_COLUMN - 1))
     {
-        R[Row] = R[Row] &~( 3 << Column );
-        R[Row + 1] = R[Row + 1] &~( 3 << Column );
+        R[Row] = R[Row] &~(3 << Column);
+        R[Row + 1] = R[Row + 1] &~(3 << Column);
 
         return true;
     }
@@ -414,10 +413,10 @@ bool ScreenAreas::resetArea(int Column, int Row)
          *          ----------
          *          -00000000-         
          */
-    else if ( Row == ( N_ROW - 1 ) && Column != 0 && Column != ( N_COLUMN - 1 ) )
+    else if (Row == (N_ROW - 1) && Column != 0 && Column != (N_COLUMN - 1))
     {
-        R[Row - 1] = R[Row - 1] &~( 7 << ( Column - 1 ) );
-        R[Row] = R[Row] &~( 7 << ( Column - 1 ) );
+        R[Row - 1] = R[Row - 1] &~(7 << (Column - 1));
+        R[Row] = R[Row] &~(7 << (Column - 1));
 
         return true;
     }
@@ -431,10 +430,10 @@ bool ScreenAreas::resetArea(int Column, int Row)
          *          ----------
          *          ----------  
          */
-    else if ( Column == 0 && Row == 0 )
+    else if (Column == 0 && Row == 0)
     {
-        R[Row] = R[Row] &~( 3 << Column );
-        R[Row + 1] = R[Row + 1] &~( 3 << Column );
+        R[Row] = R[Row] &~(3 << Column);
+        R[Row + 1] = R[Row + 1] &~(3 << Column);
 
         return true;
     }
@@ -448,10 +447,10 @@ bool ScreenAreas::resetArea(int Column, int Row)
          *          ----------
          *          ----------  
          */
-    else if ( Column == ( N_COLUMN - 1 ) && Row == 0 )
+    else if (Column == (N_COLUMN - 1) && Row == 0)
     {
-        R[Row] = R[Row] &~( 3 << ( Column - 1 ) );
-        R[Row + 1] = R[Row + 1] &~( 3 << ( Column - 1 ) );
+        R[Row] = R[Row] &~(3 << (Column - 1));
+        R[Row + 1] = R[Row + 1] &~(3 << (Column - 1));
 
         return true;
     }
@@ -465,10 +464,10 @@ bool ScreenAreas::resetArea(int Column, int Row)
          *          ----------
          *          0---------  
          */
-    else if ( Column == 0 && Row == ( N_ROW - 1 ) )
+    else if (Column == 0 && Row == (N_ROW - 1))
     {
-        R[Row - 1] = R[Row - 1] &~( 3 << Column );
-        R[Row] = R[Row] &~( 3 << Column );
+        R[Row - 1] = R[Row - 1] &~(3 << Column);
+        R[Row] = R[Row] &~(3 << Column);
 
         return true;
     }
@@ -482,10 +481,10 @@ bool ScreenAreas::resetArea(int Column, int Row)
          *          ----------
          *          ---------0  
          */
-    else if ( Column == ( N_COLUMN - 1 ) && Row == ( N_ROW - 1 ) )
+    else if (Column == (N_COLUMN - 1) && Row == (N_ROW - 1))
     {
-        R[Row - 1] = R[Row - 1] &~( 3 << ( Column - 1 ) );
-        R[Row] = R[Row] &~( 3 << ( Column - 1 ) );
+        R[Row - 1] = R[Row - 1] &~(3 << (Column - 1));
+        R[Row] = R[Row] &~(3 << (Column - 1));
 
         return true;
     }
@@ -501,11 +500,11 @@ void ScreenAreas::printMatrix()
 {
 
     bool p;
-    for ( int i = 0; i < N_ROW; i++ )
+    for (int i = 0; i < N_ROW; i++)
     {
-        for ( int j = 0; j < N_COLUMN; j++ )
+        for (int j = 0; j < N_COLUMN; j++)
         {
-            p = R[i]&( 1 << j );
+            p = R[i]&(1 << j);
             std::cout << p;
         }
         std::cout << std::endl;
@@ -522,33 +521,33 @@ void ScreenAreas::printMatrix()
  * This function is useful only of this object is used to map the palm. It returns true or false depending if the new point is in the possible area of a pen.
  * Things that are looked at are:
  * <ul><li>Is the new point on the edge of the palm (cannot be in the middle)
- * //<li>Is it mostly to the left of the palm (should not to completely to the right) <i>(assuming right handed person)</i>
+ * <li>Is it mostly to the left of the palm (should not to completely to the right) <i>(assuming right handed person)</i>
  */
 bool ScreenAreas::possiblePen(int Column, int Row)
 {
     //Checking if column and/or row is out of bound
-    if ( ( Column < 0 ) || ( Column >= N_COLUMN ) || ( Row < 0 ) || ( Row >= N_ROW ) )
+    if ((Column < 0) || (Column >= N_COLUMN) || (Row < 0) || (Row >= N_ROW))
     {
         //std::cout<<"Out of bound"<<std::endl;
         return false;
     }
 
     //checking if the column/row combination is set
-    if ( isSet(Column, Row) )
+    if (isSet(Column, Row))
     {
         //std::cout<<"Column/Row is set "<<rand() %10<<std::endl;
         return false;
     }
 
-    //    //checking if the pen is 
-    //    for (int i = Row + 3; i < N_ROW; i++)
-    //    {
-    //        if (R[i] > 0)
-    //        {
-    //            // std::cout<<"Not pen area: "<<i<<std::endl;
-    //            return false;
-    //        }
-    //    }
+    //checking if the pen is 
+    for (int i = Row + 3; i < N_ROW; i++)
+    {
+        if (R[i] > 0)
+        {
+            // std::cout<<"Not pen area: "<<i<<std::endl;
+            return false;
+        }
+    }
 
     return true;
 }
@@ -563,7 +562,7 @@ bool ScreenAreas::possiblePen(int Column, int Row)
 void ScreenAreas::orAreas(ScreenAreas* area1, ScreenAreas* area2)
 {
     //ScreenAreas area;
-    for ( int i = 0; i < N_ROW; i++ )
+    for (int i = 0; i < N_ROW; i++)
     {
         area1->R[i] = area1->R[i] | area2->R[i];
     }
@@ -579,10 +578,10 @@ void ScreenAreas::orAreas(ScreenAreas* area1, ScreenAreas* area2)
  */
 bool ScreenAreas::overlap(ScreenAreas* area1, ScreenAreas* area2)
 {
-    for ( int i = 0; i < N_ROW; i++ )
+    for (int i = 0; i < N_ROW; i++)
     {
         int a = area1->R[i] & area2->R[i];
-        if ( a > 0 )
+        if (a > 0)
         {
             return true;
         }

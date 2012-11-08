@@ -31,11 +31,11 @@
 #define PDF_TO_IMAGE_FAILED     -5
 
 #define PATH                    "pdf/exam.pdf"
-#define VERSION                 "Scribble 0.02"
+#define VERSION                 "Exam v0.8.2.4"
 
 #define ANALYZE_BUFFER          5
 #define MINIMUM_RADIUS          5       //To be adjusted
-#define MAXIMUM_RADIUS          50//30      //To be adjusted but looks fine
+#define MAXIMUM_RADIUS          100//30      //To be adjusted but looks fine
 #define MIN_R                   20
 #define MINIMUM_PATH            60      //45
 

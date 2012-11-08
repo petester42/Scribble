@@ -1,11 +1,11 @@
 /*
- * File:   inputData.cpp
+ * File:   InputData.cpp
  * Author: greg
  *
  * Created on May 3, 2012, 10:43 AM
  */
 
-#include "inputData.h"
+#include "InputData.h"
 
 /*! Default constructor
  * 
@@ -16,13 +16,13 @@
  * - <b>Move event:</b> <br>An event informing ScribbleArea that a move has occurred on the screen; includes the XY coordinates of the event.<pre></pre>
  * - <b>Release event:</b> <br>An event informing ScribbleArea of a complete release; nothing is touching the screen and no coordinates are sent.<pre></pre> 
  */
-inputData::inputData(ScribbleArea* scribble) : scribbleAreaAccess(scribble), stop_request(false), palm(scribble)
+InputData::InputData(ScribbleArea* scribble) : scribbleAreaAccess(scribble), stop_request(false), palm(scribble)
 {
     //std::cout<<"Input Data constructed"<<std::endl;
 
 }
 
-inputData::~inputData()
+InputData::~InputData()
 {
     std::cout << "Destructor InputData" << std::endl;
     delete mPointsQueue;
@@ -38,7 +38,7 @@ inputData::~inputData()
  * 
  * An negative value indicates an error
  */
-int inputData::open_port()
+int InputData::open_port()
 {
 
     int fd; /* File descriptor for the port */
@@ -62,7 +62,7 @@ int inputData::open_port()
  * 
  * <b>NEED TO FIND A WAY TO EXIT THE MAIN LOOK SINCE FOR NOW IT WILL WAIT UNTIL YOU TOUCH THE SCREEN</b>
  */
-void inputData::stop()
+void InputData::stop()
 {
     stop_request = true;
     //delete this;
@@ -72,11 +72,11 @@ void inputData::stop()
  * 
  * This is where the main implementation of the thread occurs. This function runs until the stop function is called at which point it will terminate**
  * 
- * Do <b>NOT</b> call this function directly. Use inputData::start() to start the thread. 
+ * Do <b>NOT</b> call this function directly. Use InputData::start() to start the thread. 
  * 
  * ** Need to be implemented properly. The issue now is that the reading from the port is blocking and wait until something occurs at the USB port. 
  */
-void inputData::run()
+void InputData::run()
 {
     int fd = open_port();
 
@@ -101,7 +101,7 @@ void inputData::run()
     int start_bit_1;
     int start_bit_2;
 
-    mPointsQueue = new QQueue<Point* >;
+    mPointsQueue = new queue<Point* >;
 
     /*
      * Events:
@@ -124,12 +124,14 @@ void inputData::run()
             read(fd, &start_bit_2, sizeof (char));
             start_bit_2 = start_bit_2 & CROP;
 
+            //std::cout<<"start bit 1 = "<<start_bit_1<< "\n start bit 2 = "<<start_bit_2<<"\n";
+            
             if ((start_bit_1 == 0xc0) && start_bit_2 == 0xf0)
             {
                 break;
             }
             start_bit_1 = start_bit_2;
-            //std::cout << "synchronizing start bits" << std::endl;
+            std::cout << "synchronizing start bits" << std::endl;
         }
 
         number_of_points = 0;
@@ -148,7 +150,7 @@ void inputData::run()
             Point* action_Point = read_data_from_file(fd);
             if (action_Point != NULL)
             {
-                mPointsQueue->push_back(action_Point);
+                mPointsQueue->push(action_Point);
             }
 
             //std::cout << "x: " << action_Point->getX() << " y: " << action_Point->getY() << " Cx: " << action_Point->getColumn() << " Rx: " << action_Point->getRow() << std::endl;
@@ -164,7 +166,7 @@ void inputData::run()
                 action_Point = read_data_from_file(fd);
                 if (action_Point != NULL)
                 {
-                    mPointsQueue->push_back(action_Point);
+                    mPointsQueue->push(action_Point);
                 }
                 //if (action_Point != NULL)
                 //{
@@ -194,7 +196,7 @@ void inputData::run()
                             //scribbleAreaAccess->screenPressEvent(mPointsQueue.front());
                             while (!mPointsQueue->empty())
                             {
-                                mPointsQueue->pop_back();
+                                mPointsQueue->pop();
                             }
                             event = 1;
                             //std::cout << " Touch event" << std::endl;
@@ -205,7 +207,7 @@ void inputData::run()
                             //scribbleAreaAccess->screenPressEvent(mPointsQueue.front());
                             while (!mPointsQueue->empty())
                             {
-                                mPointsQueue->pop_back();
+                                mPointsQueue->pop();
                             }
                             //scribbleAreaAccess->screenMoveEvent(mPointsQueue.front());
                             //mPointsQueue.pop();
@@ -219,7 +221,7 @@ void inputData::run()
             {
                 while (mPointsQueue->size() > 0)
                 {
-                    mPointsQueue->pop_back();
+                    mPointsQueue->pop();
                 }
                 continue;
             }
@@ -228,7 +230,7 @@ void inputData::run()
         {
             while (mPointsQueue->size() > 0)
             {
-                mPointsQueue->pop_back();
+                mPointsQueue->pop();
             }
             continue;
         }
@@ -246,7 +248,7 @@ void inputData::run()
  * 
  * This function gathers the data from the USB port and converts it into a Points object, returning a pointer to it or NULL in the case the conversion failed. 
  */
-Point* inputData::read_data_from_file(int fd)
+Point* InputData::read_data_from_file(int fd)
 {
     //Gathering the X and Y points
     column=0;
@@ -296,7 +298,7 @@ Point* inputData::read_data_from_file(int fd)
  * 
  * This function initializes the speed and other characteristics of a serial port
  */
-void inputData::initialise_port(int fd)
+void InputData::initialise_port(int fd)
 {
     struct termios options;
 

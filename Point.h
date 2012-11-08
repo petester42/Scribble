@@ -9,14 +9,13 @@
 #define	POINTS_H
 
 #include "defines.h"
-#include "QPoint"
 #include <iostream>
 
-class Point : public QPoint
-{
+class Point{
+    
 public:
-    explicit Point(int column, int row, int X, int Y);
-    //Point(int column, int row, int X, int Y);
+    explicit Point(int column_, int row_, int x_, int y_);
+   
     Point(const Point& orig);
     Point();
     virtual ~Point();
@@ -25,8 +24,14 @@ public:
     int getColumn() const;
     int getRow() const;
     void adjustForSaving();
-
+    int getX();
+    int getY();
+    void setX(int x_);
+    void setY(int y_);
+    
 private:
+    int x;
+    int y;
     int column;
     int row;
 };

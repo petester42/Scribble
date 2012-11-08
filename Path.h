@@ -10,7 +10,7 @@
 
 #include <vector>
 #include "Point.h" 
-#include "QColor"
+#include "Color.h"
 #include "defines.h"
 #include "ScreenAreas.h"
 
@@ -19,13 +19,13 @@
 class Path
 {
 public:
-    Path(Point* point, int mode, QColor color, int width, int ID, bool final = false);
+    Path(Point* point, int mode, Color color, int width, int ID, bool final = false);
     Path(const Path& orig);
     virtual ~Path();
     void addPoint(Point* point);
     std::vector<Point*> getPath();
     int getPenWidth();
-    QColor getPenColor() const;
+    Color getPenColor() const;
     int getMode() const;
     void setEraseMode();
     void setWriteMode();
@@ -38,7 +38,7 @@ public:
     int getLength();
     ScreenAreas* getArea();
     
-    void setPenColor(QColor color);
+    void setPenColor(Color color);
     
     int getPointsCount();
 
@@ -47,7 +47,7 @@ private:
 
     int WriteEraseMode;
     int myPenWidth;
-    QColor myPenColor;
+    Color myPenColor;
     std::vector<Point *> mPointsVector;
     int ID;
     bool active;

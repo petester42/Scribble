@@ -27,10 +27,10 @@
  * 
  * The vector of *Points represents the actual path. Since it is a vector of pointers it needs to be iterated through in to delete all the Point objects
  */
-Path::Path(Point* point, int mode, QColor color, int width, int id, bool fin) : WriteEraseMode(mode), myPenWidth(width), myPenColor(color), ID(id), active(true), final(fin), totalLength(0)
+Path::Path(Point* point, int mode, Color color, int width, int id, bool fin) : WriteEraseMode(mode), myPenWidth(width), myPenColor(color), ID(id), active(true), final(fin), totalLength(0)
 {
-    mX = point->x();
-    mY = point->y();
+    mX = point->getX();
+    mY = point->getY();
     mPointsVector.push_back(point);
     area = new ScreenAreas();
     area->set(point->getColumn(), point->getRow());
@@ -75,8 +75,8 @@ Path::~Path()
  */
 void Path::addPoint(Point* point)
 {
-    int dX = mX - point->x();
-    int dY = mY - point->y();
+    int dX = mX - point->getX();
+    int dY = mY - point->getY();
     totalLength += sqrt(dX * dX + dY * dY);
     area->set(point->getColumn(), point->getRow());
     mPointsVector.push_back(point);
@@ -108,7 +108,7 @@ int Path::getPenWidth()
  * 
  * This function returns a QColor representing the color on he current path
  */
-QColor Path::getPenColor() const
+Color Path::getPenColor() const
 {
     return myPenColor;
 }
@@ -230,7 +230,7 @@ ScreenAreas* Path::getArea()
  * 
  * @param color The new QColor of the pen
  */
-void Path::setPenColor(QColor color)
+void Path::setPenColor(Color color)
 {
     myPenColor = color;
 }
