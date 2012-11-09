@@ -51,8 +51,8 @@ OBJECTFILES= \
 CFLAGS=
 
 # CC Compiler Flags
-CCFLAGS=-lglut -lGL -lGLU -lboost_thread-mt
-CXXFLAGS=-lglut -lGL -lGLU -lboost_thread-mt
+CCFLAGS=-lglut -lGL -lGLU -lboost_thread-mt -lboost_system-mt -lboost_program_options-mt
+CXXFLAGS=-lglut -lGL -lGLU -lboost_thread-mt -lboost_system-mt -lboost_program_options-mt
 
 # Fortran Compiler Flags
 FFLAGS=
@@ -65,11 +65,11 @@ LDLIBSOPTIONS=-L/usr/local/lib
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/scribble_gl
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/scribble
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/scribble_gl: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/scribble: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/scribble_gl ${OBJECTFILES} ${LDLIBSOPTIONS} 
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/scribble ${OBJECTFILES} ${LDLIBSOPTIONS} 
 
 ${OBJECTDIR}/InputData.o: InputData.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -127,7 +127,7 @@ ${OBJECTDIR}/UI.o: UI.cpp
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/scribble_gl
+	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/scribble
 
 # Subprojects
 .clean-subprojects:

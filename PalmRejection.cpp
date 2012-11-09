@@ -1,4 +1,5 @@
 /*
+ *
  * File:   PalmRejection.cpp
  * Author: greg
  *
@@ -11,7 +12,6 @@
  * 
  * @param scribbleA This is a pointer to the a ScribbleArea
  */
-
 PalmRejection::PalmRejection(ScribbleArea* scribbleA) : scribble(scribbleA), stopRequest(false), position(0), sampling(0), penPresent(false), mX(-1), mY(-1)
 {
     //for now limit vector to 5, analyze data and decide what to do with it
@@ -19,11 +19,9 @@ PalmRejection::PalmRejection(ScribbleArea* scribbleA) : scribble(scribbleA), sto
 
     //Timer used for palm reset
     //The palm will be fully reset after x seconds of 0 activity on the screen
-    
-    
-    
-    //palmResetTimer.expires_from_now(boost::posix_time::millisec(RESET_TIMER));
-    //palmResetTimer.async_wait(resetPalm);
+    palmResetTimer = new boost::asio::deadline_timer(io_service);
+    palmResetTimer->expires_from_now(boost::posix_time::seconds(RESET_TIMER));
+    palmResetTimer->async_wait(boost::bind(&PalmRejection::resetPalm, this,_1)); 
 }
 
 /** Default destructor
@@ -32,7 +30,8 @@ PalmRejection::PalmRejection(ScribbleArea* scribbleA) : scribble(scribbleA), sto
  */
 PalmRejection::~PalmRejection()
 {
-    //palmResetTimer.cancel();
+    palmResetTimer->cancel();
+    delete palmResetTimer;
     
     flushPointBuffer();
 }
@@ -44,7 +43,20 @@ PalmRejection::~PalmRejection()
  * The resetTimer is only set once there is a complete release on the screen and is stopped as soon as the a new activity occurs. If the timer doesn't have the time to expire
  * this function will not be called and no reset will occur. 
  */
-void PalmRejection::resetPalm()
+
+/*void handler1(const boost::system::error_code &ec) 
+{ 
+    if (ec == boost::asio::error::operation_aborted)
+    {
+        std::cout << microsec_clock::local_time() << " Handler1: Timer 1 was cancelled or retriggered." << std::endl; 
+    }
+    else
+    {
+        std::cout << microsec_clock::local_time() << " Handler1: expired." << std::endl; 
+    }
+}*/
+
+void PalmRejection::resetPalm(const boost::system::error_code &ec)
 {
     mPalm.clearMatrix();
     //std::cout << "RESET PALM" << std::endl;
@@ -52,7 +64,7 @@ void PalmRejection::resetPalm()
     //FOR TESTING
     //mPen.clearMatrix();
     
-    //palmResetTimer.cancel();
+    palmResetTimer->cancel();
 }
 
 /** Touch event
@@ -71,7 +83,7 @@ void PalmRejection::eventTouch(std::queue<Point* > *mPointsQueue)
     }
 
     //Stop the palm reset timer
-    //palmResetTimer.cancel();
+    palmResetTimer->cancel();
 
     //Remove possible duplicated points and find the palm and/or pen
     analyzeNewSetOfPoints();
@@ -127,12 +139,10 @@ void PalmRejection::eventRelease(/*Points *point*/)
 {
     //Disable penPresent, send release event to scribbleArea, clean buffer, and start palm reset timer
     scribble->screenReleaseEvent();
-    resetPalm();
-    
     penPresent = false;
     flushPointBuffer();
-    //palmResetTimer.expires_from_now(boost::posix_time::millisec(RESET_TIMER));
-    //palmResetTimer.async_wait(resetPalm);
+    palmResetTimer->expires_from_now(boost::posix_time::seconds(RESET_TIMER));
+    palmResetTimer->async_wait(boost::bind(&PalmRejection::resetPalm, this,_1));
 }
 
 /** Modulo function (always positive)

@@ -56,7 +56,7 @@
           <incDir>
             <pElem>.</pElem>
           </incDir>
-          <commandLine>-lglut -lGL -lGLU -lboost_thread-mt</commandLine>
+          <commandLine>-lglut -lGL -lGLU -lboost_thread-mt -lboost_system-mt -lboost_program_options-mt</commandLine>
         </ccTool>
         <linkerTool>
           <linkerAddLib>
@@ -79,7 +79,7 @@
           <incDir>
             <pElem>.</pElem>
           </incDir>
-          <commandLine>-lglut -lGL -lGLU -lboost_thread-mt</commandLine>
+          <commandLine>-lglut -lGL -lGLU -lboost_thread-mt -lboost_system-mt -lboost_program_options-mt</commandLine>
         </ccTool>
         <fortranCompilerTool>
           <developmentMode>5</developmentMode>

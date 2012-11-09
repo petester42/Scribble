@@ -21,23 +21,32 @@ public:
     virtual ~ScribbleArea();
     void Draw();
     
-    Color getPenColor();
+    void setPenColor(Color *newColor);
+    void setPenWidth(float newWidth);
+    
+    Color* getPenColor();
     float getPenSize();
+   
+    void nextPage();
+    void previousPage();
+    void undo();
+    void redo();
+    void write();
+    void erase();
+    void clearAll();
     
     void screenPressEvent(Point* point);
     void screenMoveEvent(Point* point);
     void screenReleaseEvent(/*Points *point*/);
     
-    void write();
-    
 private:
 
      enum modes
     {
-        WRITE/*, ERASE, MENU_PRESS, LOAD, SAVE_AS, COLOUR, SIZE_WRITE, SIZE_ERASE*/
+        WRITE, ERASE, MENU_PRESS, LOAD, SAVE_AS, COLOUR, SIZE_WRITE, SIZE_ERASE
     };
     
-    Color penColor;
+    Color* penColor;
     float penSize;
     
     int mMode;

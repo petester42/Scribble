@@ -1,4 +1,5 @@
 /* 
+ * Not Completely Ported
  * File:   ScribbleArea.cpp
  * Author: scribble
  * 
@@ -6,29 +7,26 @@
  */
 
 #include "ScribbleArea.h"
-#include "Point.h"
-#include "Path.h"
 
 ScribbleArea::ScribbleArea() {
     
-    penColor = Color();
+    //default values
+    penColor = new Color();
     penSize = 1.0;
     currentPage = 0;
-
- /*   Point* point1 = new Point(0,0,0,100);
-    Point* point2 = new Point(0,0,100,100);
     
-    std::vector<Point *> mPointsVector;
-
-    mPointsVector.push_back(point1);
-  
-    Path *path = new Path(mPointsVector.at(0), 0, penColor, penSize, 0, 1);
-
-    path->addPoint(point2);
-    */
     pathsOnPage.resize(5);
     Paths_IDs.resize(5);
-    /*pathsOnPage.at(currentPage).push_back(path);*/
+    
+    
+  /*Point* point1 = new Point(0,0,0,100);
+    Point* point2 = new Point(0,0,100,100);
+      
+    Path *path = new Path(point1, 0, penColor, penSize, 0, 1);
+
+    path->addPoint(point2);
+    
+    pathsOnPage.at(currentPage).push_back(path);*/
 }
 
 ScribbleArea::ScribbleArea(const ScribbleArea& orig) {
@@ -39,7 +37,29 @@ ScribbleArea::~ScribbleArea() {
     delete mTempPath;
 }
 
-Color ScribbleArea::getPenColor(){
+/*! Set Pen Color
+ *
+ * \param &newColor A reference to a QColor object
+ *
+ * This function sets the pen color
+ */
+void ScribbleArea::setPenColor(Color* newColor)
+{
+    penColor = newColor;
+}
+
+/*! Set Pen Width
+ *
+ * \param newWidth An integer representing the new width of the pen
+ *
+ * This function set the width of the pen to be used.
+ */
+void ScribbleArea::setPenWidth(float newWidth)
+{
+     penSize = newWidth;
+}
+
+Color* ScribbleArea::getPenColor(){
     return penColor;
 }
   
@@ -157,7 +177,7 @@ void ScribbleArea::write()
 
 void ScribbleArea:: Draw(){
     
-    glColor3f(penColor.getRed(),penColor.getGreen(),penColor.getBlue());
+    glColor3f(penColor->getRed(),penColor->getGreen(),penColor->getBlue());
        
            
    // glVertex3f(100,0,0);

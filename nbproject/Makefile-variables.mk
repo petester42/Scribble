@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux-x86
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux-x86
-CND_ARTIFACT_NAME_Debug=scribble_gl
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/scribble_gl
+CND_ARTIFACT_NAME_Debug=scribble
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/scribble
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Debug=scribblegl.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/scribblegl.tar
+CND_PACKAGE_NAME_Debug=scribble.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/scribble.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux-x86
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux-x86
-CND_ARTIFACT_NAME_Release=scribble_gl
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/scribble_gl
+CND_ARTIFACT_NAME_Release=scribble
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/scribble
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Release=scribblegl.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/scribblegl.tar
+CND_PACKAGE_NAME_Release=scribble.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/scribble.tar
 #
 # include compiler specific variables
 #
