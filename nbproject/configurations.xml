@@ -4,13 +4,21 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>AddPointsToPathRequest.h</itemPath>
       <itemPath>ColourPalette.h</itemPath>
+      <itemPath>DeletePathRequest.h</itemPath>
+      <itemPath>EndCurrentPathRequest.h</itemPath>
       <itemPath>Keyboard.h</itemPath>
+      <itemPath>NewPathRequest.h</itemPath>
       <itemPath>PalmRejection.h</itemPath>
       <itemPath>Path.h</itemPath>
       <itemPath>Point.h</itemPath>
+      <itemPath>RedoRequest.h</itemPath>
+      <itemPath>Request.h</itemPath>
       <itemPath>ScreenAreas.h</itemPath>
+      <itemPath>Sender.h</itemPath>
       <itemPath>SizeChooser.h</itemPath>
+      <itemPath>UndoRequest.h</itemPath>
       <itemPath>defines.h</itemPath>
       <itemPath>inputData.h</itemPath>
       <itemPath>loadFileWindow.h</itemPath>
@@ -27,13 +35,23 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>AddPointsToPathRequest.cpp</itemPath>
       <itemPath>ColourPalette.cpp</itemPath>
+      <itemPath>DeletePathRequest.cpp</itemPath>
+      <itemPath>EndCurrentPathRequest.cpp</itemPath>
       <itemPath>Keyboard.cpp</itemPath>
+      <itemPath>NewPathRequest.cpp</itemPath>
       <itemPath>PalmRejection.cpp</itemPath>
       <itemPath>Path.cpp</itemPath>
       <itemPath>Point.cpp</itemPath>
+      <itemPath>Receiver.cpp</itemPath>
+      <itemPath>Receiver.h</itemPath>
+      <itemPath>RedoRequest.cpp</itemPath>
+      <itemPath>Request.cpp</itemPath>
       <itemPath>ScreenAreas.cpp</itemPath>
+      <itemPath>Sender.cpp</itemPath>
       <itemPath>SizeChooser.cpp</itemPath>
+      <itemPath>UndoRequest.cpp</itemPath>
       <itemPath>inputData.cpp</itemPath>
       <itemPath>loadFileWindow.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -75,8 +93,12 @@
           </incDir>
         </ccTool>
         <linkerTool>
+          <linkerDynSerch>
+            <pElem>/usr/include/boost</pElem>
+          </linkerDynSerch>
           <linkerLibItems>
             <linkerLibLibItem>poppler-qt4</linkerLibLibItem>
+            <linkerLibLibItem>boost_thread-mt</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>

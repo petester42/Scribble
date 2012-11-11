@@ -1,6 +1,14 @@
 #ifndef SCRIBBLEAREA_H
 #define SCRIBBLEAREA_H
 
+//server
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h> 
+#include <sys/socket.h>
+#include <netinet/in.h>
+
+
 #include <QColor>
 #include <QImage>
 #include "Point.h"
@@ -31,8 +39,19 @@
 #include "menu.h"
 
 #include <QMutex>
+#include "Sender.h"
+#include "Receiver.h"
 
-#define TEST
+#include <boost/thread.hpp>     //Used for boost thread
+//#include <boost/algorithm/string.hpp>   //Used for boost split function
+//
+//#include "Request.h"
+//#include "NewPathRequest.h"
+//#include "AddPointsToPathRequest.h"
+//#include "EndCurrentPathRequest.h"
+//#include "UndoRequest.h"
+//#include "RedoRequest.h"
+//#include "DeletePathRequest.h"
 
 class ScribbleArea : public QWidget
 {
@@ -63,6 +82,7 @@ public:
     void screenMoveEvent(Point* point);
     void screenReleaseEvent(/*Points *point*/);
 
+
 public slots:
 
 private slots:
@@ -89,9 +109,6 @@ private:
     void cleanPathsOnCurentPageVector();
     void displayOtherWindows(QPainter& painter);
     bool drawnPathsAnalyzer(int start, int item, int end);
-    
-    
-    //void sendPacket();
 
     std::string DOC_PATH;
     bool modified;
@@ -111,6 +128,8 @@ private:
         MENU_BOTTON_W = 47,
         MENU_BOTTON_SPACING = 17
     };
+
+
 
     int mMode;
     int oldWriteEraseMode;
@@ -153,6 +172,70 @@ private:
 
     Poppler::Document* document;
     Poppler::Page* pdfPage;
+
+    ///////////////////////////////////////////////////////////////////////////////////
+    //Needed for the network part of this project
+    ///////////////////////////////////////////////////////////////////////////////////
+    void checkRequests();
+    void SendTests();
+    
+    bool checkMyRequests;
+
+    typedef std::vector <Request*> Vector_Request;
+    Vector_Request *mRequests;
+    Receiver* receiver;
+    boost::mutex *requestsMutex;
+    Sender * mySender;
+    std::string username;
+    std::string password;
+    
+
+
+    //    void InitializeNetwork();
+    //    void SendTests();
+    //    std::string ToBytesConv(int integer);
+    //
+    //    void ReceiverFunction();
+    //    void AnalyzeThread(std::string * toAnalyze);
+    //
+    //    boost::thread * workerThread;
+    //
+    //    Sender* mySender;
+    //    int mListeningPort;
+    //    int sockfd;
+    //    int newsockfd;
+    //    bool loggedIn;
+    //    bool hasOwnership;
+    //    int nextRequestID;
+    //    
+    //    std::vector<Request*> mRequests;
+    //    
+    //    
+    //    
+    //
+    //    std::string username;
+    //    std::string password;
+    //    std::string userFileOwner;
+    //
+    //    enum protocol
+    //    {
+    //        LOG_IN_SUCCESSFUL = 0,
+    //        LOG_IN_FAILED_WRONG_PASSWORD = 1,
+    //        LOG_OUT_SUCCESSFUL = 2,
+    //        LOG_OUT_FAILED = 3,
+    //        ALLOW_OWNERSHIP = 4,
+    //        DISALLOW_OWNERSHIP = 5,
+    //        NEW_PATH = 6,
+    //        ADD_POINTS_TO_PATH = 7,
+    //        END_CURRENT_PATH = 8,
+    //        UNDO_LAST_ACTION = 9,
+    //        REDO_LAST_ACTION = 10,
+    //        DELETE_PATH = 11,
+    //        FILE_LIST_AVAILABLE = 12,
+    //        PERIODIC_ALIVE_CHECK = 13,
+    //        OWNERSHIP_IS_AVAILABLE = 14,
+    //        LOG_IN_FAIL_USER_ALREADY_LOGGED_IN = 15
+    //    };
 };
 
 #endif

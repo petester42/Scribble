@@ -37,18 +37,14 @@ private:
     float sqrt(int x);
 
     void analyzeNewSetOfPoints(); //this is done to reject possible "duplicates" of points caused on area edges
-    //    void findPen_old(); //Find the pen, not necessarily there
-        void findPen();
-    //    void findPalm();
+    void findPen();
     void findNextPoint();
     void updatePalmMatrix(ushort slot, ushort ignore = -1);
     void updatePosition();
     void flushPointBuffer();
-    bool analysePossiblePenPoints();
     bool firstTryFindingPenAndPalm();
     void compact_pointToAnalyze();
 
-    //Point* findFurthestPoint();
     float getDistance(int, int);
 
     ScribbleArea* scribble;

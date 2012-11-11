@@ -3,6 +3,11 @@
 
 #include "mainwindow.h"
 
+void testing()
+{
+    std::cout<<"Main window threa"<<std::endl;
+}
+
 /*! Default constructor
  * 
  * This the default constructor. It created the ScribbleArea, the inputData thread, sets the window outline and creates all tge buttons available to the user. 
@@ -20,6 +25,9 @@ MainWindow::MainWindow():window(NULL), layout(NULL), preB(NULL),  undoB(NULL),  
     setWindowTitle(tr(VERSION));
     //resize(HEIGHT, WIDTH);
     resize(WIDTH, HEIGHT);
+    
+    //ScribbleArea t2;
+    //boost::thread  t(testing);//, &t2));
 }
 
 /*! Default destructor

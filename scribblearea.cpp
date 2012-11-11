@@ -10,8 +10,16 @@
  * Initializes the ScribbleArea object
  */
 ScribbleArea::ScribbleArea(QWidget *parent)
-: QWidget(parent), DOC_PATH(PATH), modified(false), reviewNeeded(false), pathUpdateNeeded(false), scribbling(false), updateImage(true), mMode(WRITE), oldWriteEraseModeSize(WRITE), myPenSize(1), myEraserSize(10), buttonPressed(Menu::NONE), currentPage(0), myPenColor(Qt::black), oldPoint(NULL), mTempPath(NULL), document(NULL), pdfPage(NULL)
+: QWidget(parent), DOC_PATH(PATH), modified(false), reviewNeeded(false), pathUpdateNeeded(false), scribbling(false), updateImage(true), mMode(WRITE), oldWriteEraseModeSize(WRITE), myPenSize(1), myEraserSize(10), buttonPressed(Menu::NONE), currentPage(0), myPenColor(Qt::black), oldPoint(NULL), mTempPath(NULL), document(NULL), pdfPage(NULL), checkMyRequests(true)//, loggedIn(false), hasOwnership(false)//, mListeningPort(44900)
 {
+
+    std::string te = "0";
+    std::string te2 = "1";
+    bool test = ( te != "0" );
+    bool test2 = ( te2 != "0" );
+
+    std::cout << test << " " << test2 << std::endl;
+
     setAttribute(Qt::WA_StaticContents);
 
     //load pdf and make sure it contains at least 1 page
@@ -45,7 +53,49 @@ ScribbleArea::ScribbleArea(QWidget *parent)
     updatePathVector->start(UPDATE_PATHS_VECTOR);
 
     updateImage = true;
-    //sendPacket();
+
+    mRequests = new Vector_Request();
+    requestsMutex = new boost::mutex();
+
+    //TODO server address and port should be variables that the user can change if needed
+    std::string add = "127.0.0.1";
+    mySender = new Sender(add, 21223);
+
+    //TODO User will have to enter this (username and password)
+    username = "greg";
+    password = "pass";
+
+    receiver = new Receiver(mRequests, requestsMutex, username);
+    boost::thread(&ScribbleArea::checkRequests, this);
+
+    mySender->Login(username, password, receiver->GetMListeningPort());
+    boost::thread(&ScribbleArea::SendTests, this);
+}
+
+void ScribbleArea::SendTests()
+{
+    boost::this_thread::sleep(boost::posix_time::milliseconds(500));
+    mySender->GetFilesList();
+    //boost::this_thread::sleep(boost::posix_time::milliseconds(100));
+    mySender->RequestOwnership();
+
+    Point m1(0, 0, 10, 10);
+    Point m2(0, 0, 20, 20);
+    Point m3(0, 0, 30, 30);
+    Point m4(0, 0, 40, 40);
+
+    std::vector<Point> mPoints;
+    mPoints.push_back(m1);
+    mPoints.push_back(m2);
+    mPoints.push_back(m3);
+    mPoints.push_back(m4);
+
+    mySender->NewPath(3, true, 34567, true, 0);
+    mySender->AddPoints(3, 4, mPoints);
+    mySender->EndPath(3);
+    mySender->Logout();
+
+    std::cout << "Scribble area end of SendTests function" << std::endl;
 }
 
 /*! Default destructor
@@ -75,6 +125,15 @@ ScribbleArea::~ScribbleArea()
     delete sizeChooserWrite;
     delete sizeChooserErase;
     delete menu;
+
+    checkMyRequests = false;
+    delete receiver;
+
+    //    ::close(newsockfd);
+    //    ::close(sockfd);
+
+    //TESTING
+    std::cout << "Scribble area destructor finished" << std::endl;
 }
 
 /*! Save file
@@ -171,35 +230,6 @@ void ScribbleArea::myUpdate()
 void ScribbleArea::updatePDF()
 {
 
-    // Generate a QImage of the rendered page
-
-    //APPARENTLY THERE IS A MEMORY LEAK SOMEPLACE HERE
-    /*
-    ==11665== 28 (24 direct, 4 indirect) bytes in 1 blocks are definitely lost in loss record 277 of 678
-    ==11665==    at 0x400737F: operator new(unsigned int) (vg_replace_malloc.c:255)
-    ==11665==    by 0x3F2850B: Splash::Splash(SplashBitmap*, int, SplashScreenParams*) (in /usr/lib/libpoppler.so.5.0.0)
-    ==11665==    by 0x3E7038F: SplashOutputDev::SplashOutputDev(SplashColorMode, int, int, unsigned char*, int, int) (in /usr/lib/libpoppler.so.5.0.0)
-    ==11665==    by 0x40451A8: Poppler::Page::renderToImage(double, double, int, int, int, int, Poppler::Page::Rotation) const (in /usr/lib/libpoppler-qt4.so.3.2.0)
-    ==11665==    by 0x804C04F: ScribbleArea::updatePDF() (scribblearea.cpp:86)
-    ==11665==    by 0x804C295: ScribbleArea::loadPDF_withPagesCount() (scribblearea.cpp:121)
-    ==11665==    by 0x804BC13: ScribbleArea::ScribbleArea(QWidget*) (scribblearea.cpp:15)
-    ==11665==    by 0x8051078: MainWindow::MainWindow() (mainwindow.cpp:12)
-    ==11665==    by 0x8052828: main (main.cpp:17)
-    ==11665==
-    {
-        <insert_a_suppression_name_here>
-        Memcheck:Leak
-        fun:_Znwj
-        fun:_ZN6SplashC1EP12SplashBitmapiP18SplashScreenParams
-        fun:_ZN15SplashOutputDevC1E15SplashColorModeiiPhii
-        fun:_ZNK7Poppler4Page13renderToImageEddiiiiNS0_8RotationE
-        fun:_ZN12ScribbleArea9updatePDFEv
-        fun:_ZN12ScribbleArea22loadPDF_withPagesCountEv
-        fun:_ZN12ScribbleAreaC1EP7QWidget
-        fun:_ZN10MainWindowC1Ev
-        fun:main
-    }
-     */
     QImage loadedImage(pdfPage->renderToImage(PDF_RESOLUTION, PDF_RESOLUTION, /*72.0, 72.0,*/ -1, -1, WIDTH, HEIGHT, /*-1, -1,*/ Poppler::Page::Rotate0)); //pdfPage->renderToImage(PDF_RESOLUTION, PDF_RESOLUTION - 10, 0, -80, WIDTH, HEIGHT, Poppler::Page::Rotate0)); // =  //All default values with the exception of rotation: Poppler::Page::Rotate270
     //QImage loadedImage(pdfPage->renderToImage(100, 100, -1, -1, -1, -1, /*-1, -1,*/ Poppler::Page::Rotate0));
     if ( loadedImage.isNull() )
@@ -240,31 +270,6 @@ int ScribbleArea::loadPDF_withPagesCount(std::string fileName)
     updatePDF();
     return document->numPages();
 }
-
-/* ! Save image
- *
- * \param &fileName The filename under which the image should be saved
- * \param *fileFormat The file format in which the image should be saved
- *
- * This function save the current viewed image as a image file.
- * /
-bool ScribbleArea::saveImage(const QString &fileName, const char *fileFormat)
-{
-    lockForImage.lock();
-    QImage visibleImage = image;
-    lockForImage.unlock();
-    resizeImage(&visibleImage, size());
-
-    if (visibleImage.save(fileName, fileFormat))
-    {
-        //modified = false;
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}*/
 
 /*! Set Pen Color
  *
@@ -1370,3 +1375,14 @@ bool ScribbleArea::drawnPathsAnalyzer(int start, int item, int end)
 
 }
 
+/**
+ * This function check and executes all the requests that have been received from the server
+ */
+void ScribbleArea::checkRequests()
+{
+    while ( checkMyRequests )
+    {
+
+        boost::this_thread::sleep(boost::posix_time::milliseconds(200));
+    }
+}

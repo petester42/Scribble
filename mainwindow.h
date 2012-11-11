@@ -14,6 +14,8 @@
 
 #include <queue>
 
+#include <boost/thread/thread.hpp> 
+
 class ScribbleArea;
 
 class MainWindow : public QMainWindow

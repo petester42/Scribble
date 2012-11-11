@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'PalmRejection.h'
 **
-** Created: Fri Oct 26 16:46:58 2012
+** Created: Sat Nov 10 23:32:37 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
 **
 ** WARNING! All changes made in this file will be lost!

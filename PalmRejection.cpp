@@ -104,6 +104,7 @@ void PalmRejection::eventMove(QQueue<Point* > *mPointsQueue)
 
     else if ( !penPresent && !mPalm.isSet() )
     {
+        std::cout << "from Event move" << std::endl;
         firstTryFindingPenAndPalm();
         //std::cout<<"Find palm"<<std::endl;
         //findPalm();
@@ -136,7 +137,7 @@ bool PalmRejection::firstTryFindingPenAndPalm()
         {
             //We found a pen
             penPresent = true;
-            std::cout << "Been here" << std::endl;
+            std::cout << "Been here, pen found only 1 point in each set" << std::endl;
 
             //Send events to the drawing area
             scribble->screenPressEvent(pointToAnalyze[pos[0]][0]);
@@ -164,7 +165,7 @@ bool PalmRejection::firstTryFindingPenAndPalm()
     {
         for ( int i = 0; i < 4; i++ )
         {
-            for ( int j = 0; j < pointToAnalyze[pos[i]].size(); j++ )
+            for ( uint j = 0; j < pointToAnalyze[pos[i]].size(); j++ )
             {
                 if ( pointToAnalyze[pos[i]][j] != NULL )
                 {
@@ -198,6 +199,7 @@ bool PalmRejection::firstTryFindingPenAndPalm()
         {
             std::cout << "GOT T" << std::endl;
 
+            //Set true as before but if one point goes out of bound we set it to false... see below
             bool foundNewPen = true;
             for ( int i = 0; i < 3; i++ )
             {
@@ -217,7 +219,7 @@ bool PalmRejection::firstTryFindingPenAndPalm()
                 {
                     std::cout << "Not within the radius range" << std::endl;
                     foundNewPen = false;
-                    mPalm.set(pointToAnalyze[pos[i]][index[i]]->getColumn(), pointToAnalyze[pos[i]][index[i]]->getRow());
+                    break;
                 }
                 //  }
             }
@@ -243,10 +245,18 @@ bool PalmRejection::firstTryFindingPenAndPalm()
 
                 toBeReturned = true;
             }
+            else
+            {
+                for ( int i = 0; i < 4; i++ )
+                {
+                    mPalm.set(pointToAnalyze[pos[i]][index[i]]->getColumn(), pointToAnalyze[pos[i]][index[i]]->getRow());
+                }
+
+            }
         }
     }
 
-    return false;
+    return toBeReturned;
 }
 
 /**
@@ -384,15 +394,16 @@ void PalmRejection::findPen()
 {
 
     //check if a point in the current set falls into the mPen area. If yes, assume it is the pen
-
     bool foundPen = false;
     for ( int i = 0; i < ( int ) pointToAnalyze[position].size(); i++ )
     {
         if ( pointToAnalyze[position][i] != NULL )
         {
             //std::cout << "(pointToAnalyze[position][i]->getRow(): " << pointToAnalyze[position][i]->getRow() << " pointToAnalyze[position][i]->getColumn(): " << pointToAnalyze[position][i]->getColumn() << std::endl;
-            if ( ( pointToAnalyze[position][i] != NULL ) && ( mPen.isSet(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow()) ) && !foundPen )// || ( pointToAnalyze[position][i]->getRow() > 4 ) ) )
+            if ( ( mPalm.possiblePen(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow())||mPen.isSet(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow()) ) && !foundPen )// || ( pointToAnalyze[position][i]->getRow() > 4 ) ) )
             {
+
+
                 scribble->screenPressEvent(pointToAnalyze[position][i]);
                 //std::cout<<"Press -         findPen() first loop"<<std::endl;
 
@@ -400,6 +411,10 @@ void PalmRejection::findPen()
                 mPen.clearMatrix();
 
                 mPen.setArea(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow());
+
+                mX = pointToAnalyze[position][i]->x();
+                mY = pointToAnalyze[position][i]->y();
+
                 pointToAnalyze[position][i] = NULL;
                 penPresent = true;
                 foundPen = true;
@@ -410,7 +425,7 @@ void PalmRejection::findPen()
             }
             else if ( pointToAnalyze[position][i] != NULL )
             {
-                mPalm.set(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow());
+                mPalm.setArea(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow());
             }
         }
     }
@@ -419,13 +434,18 @@ void PalmRejection::findPen()
         return;
     }
 
+    compact_pointToAnalyze();
 
+    //std::cout << "from find pen" << std::endl;
     if ( firstTryFindingPenAndPalm() )
     {
         return;
     }
+    //std::cout << "firstTryFindingPenAndPalm failed" << std::endl;
 
     compact_pointToAnalyze();
+
+    std::cout << "All failed, failing back on old method" << std::endl;
 
     //Used for set comparison to find possible points that will result in a pen. 
     int firstSet = mod(position - 3);
@@ -435,11 +455,15 @@ void PalmRejection::findPen()
 
     bool completeBreak = false;
 
+//    int pos[] = { firstSet, secondSet, thirdSet, forthSet };
+    int where = 0;
+
     //for each point is the first set
     for ( ushort i = 0; i < pointToAnalyze[firstSet].size(); i++ )
     {
         if ( ( pointToAnalyze[firstSet][i] != NULL ) )
         {
+            where = 1;
             //check if the point is in a possible pen area. If yes keep comparing points, otherwise set it as Palm area
             if ( !mPalm./*possiblePen*/isSet(pointToAnalyze[firstSet][i]->getColumn(), pointToAnalyze[firstSet][i]->getRow()) )
             {
@@ -448,6 +472,7 @@ void PalmRejection::findPen()
                 {
                     if ( ( pointToAnalyze[secondSet][j] != NULL ) )
                     {
+                        where = 2;
                         //check if the point is in a possible pen area. If yes keep comparing points, otherwise set it as Palm area
                         if ( !mPalm./*possiblePen*/isSet(pointToAnalyze[secondSet][j]->getColumn(), pointToAnalyze[secondSet][j]->getRow()) )
                         {
@@ -466,6 +491,7 @@ void PalmRejection::findPen()
                                 {
                                     if ( ( pointToAnalyze[thirdSet][k] != NULL ) )
                                     {
+                                        where = 3;
                                         //check if the point is in a possible pen area. If yes keep comparing points, otherwise set it as Palm area
                                         if ( !mPalm./*possiblePen*/isSet(pointToAnalyze[thirdSet][k]->getColumn(), pointToAnalyze[thirdSet][k]->getRow()) )
                                         {
@@ -484,6 +510,7 @@ void PalmRejection::findPen()
                                                 {
                                                     if ( ( pointToAnalyze[forthSet][l] != NULL ) )
                                                     {
+                                                        where = 4;
                                                         //check if the point is in a possible pen area. If yes keep comparing points, otherwise set it as Palm area
                                                         if ( !mPalm./*possiblePen*/isSet(pointToAnalyze[forthSet][l]->getColumn(), pointToAnalyze[forthSet][l]->getRow()) )
                                                         {
@@ -531,6 +558,7 @@ void PalmRejection::findPen()
                                                                 pointToAnalyze[thirdSet][k] = NULL;
                                                                 pointToAnalyze[forthSet][l] = NULL;
 
+                                                                std::cout << "Got pen in old code" << std::endl;
                                                                 completeBreak = true;
                                                                 break;
                                                             }
@@ -582,6 +610,17 @@ void PalmRejection::findPen()
     {
         scribble->screenReleaseEvent();
         penPresent = false;
+
+        //        for ( int i = 0; i < where; i++ )
+        //        {
+        //            for ( int j = 0; j < pointToAnalyze[i].size(); j++ )
+        //            {
+        //                if(pointToAnalyze[pos[i]][j]!=NULL)
+        //                {
+        //                    mPalm.set(pointToAnalyze[pos[i]][j]->getColumn(), pointToAnalyze[pos[i]][j]->getRow());
+        //                }                
+        //            }
+        //        }
     }
 
     //updatePosition();
@@ -696,7 +735,6 @@ void PalmRejection::updatePosition()
     for ( uint i = 0; i < pointToAnalyze[position].size(); i++ )
     {
         //Do not need to check for NULL since delete NULL has not effect
-
         delete pointToAnalyze[position][i];
     }
     pointToAnalyze[position].clear();
@@ -718,41 +756,46 @@ void PalmRejection::findNextPoint()
         if ( pointToAnalyze[position][i] != NULL )
         {
             //if the point is in the pen area and not in the palm area
-            if ( mPen.isSet(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow()));// || !mPalm.isSet(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow()));//|| mPalm.possiblePen(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow()) ) // && !mPalm.isSet(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow()))
+            if ( mPen.isSet(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow()) && !mPalm.isSet(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow()) );
             {
-                // We should find the radius from the last point and make sure that we do not exceed a MAXIMUM (minimum not necessary
+                // We should find the radius from the last point and make sure that we do not exceed a MAXIMUM (minimum not necessary)
                 int Dx = mX - pointToAnalyze[position][i]->x();
                 int Dy = mY - pointToAnalyze[position][i]->y();
 
                 mX = pointToAnalyze[position][i]->x();
                 mY = pointToAnalyze[position][i]->y();
 
-                //Move the pen area to correspond to the newly found pen point
-                mPen.clearMatrix();
-                mPen.setArea(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow());
-
-                //Update the palm area with the point(s) that do not correspond to the pen
-                //mPalm.clearMatrix();
-
-                updatePalmMatrix(position, i);
-                mPalm.reset(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow());
-
                 //if the new pen point is within the 
-                if ( sqrt(Dx * Dx + Dy * Dy) < MAXIMUM_RADIUS ) //This was 2*MAXIMUM_RADIUS and worked well. testing with different values
+                if ( sqrt(Dx * Dx + Dy * Dy) < 2*MAXIMUM_RADIUS ) //This was 2*MAXIMUM_RADIUS and worked well. testing with different values
                 {
+                    //Move the pen area to correspond to the newly found pen point
+                    mPen.clearMatrix();
+                    mPen.setArea(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow());
+
+                    //Update the palm area with the point(s) that do not correspond to the pen
+                    mPalm.clearMatrix();
+
+                    updatePalmMatrix(position, i);
+                    mPalm.reset(pointToAnalyze[position][i]->getColumn(), pointToAnalyze[position][i]->getRow());
+
                     scribble->screenMoveEvent(pointToAnalyze[position][i]);
+                    found = true;
+                    pointToAnalyze[position][i] = NULL;
+                    break;
                 }//otherwise assume the new point represents a "new" pen by sending a release followed by a press events to the scribble area
                 else
                 {
-                    scribble->screenReleaseEvent();
-                    scribble->screenPressEvent(pointToAnalyze[position][i]);
+                    continue;
+                    //scribble->screenReleaseEvent();
+                    //scribble->screenPressEvent(pointToAnalyze[position][i]);
+                    //delete pointToAnalyze[position][i];
                     //std::cout<<"Press -         findNextPoint"<<std::endl;
                 }
 
                 //Set the sent point pointer to NULL since it is own by the scribble area now
-                pointToAnalyze[position][i] = NULL;
-                found = true;
-                break;
+
+                //break;
+
             }
         }
     }
@@ -782,185 +825,4 @@ void PalmRejection::flushPointBuffer()
         pointToAnalyze[i].clear();
     }
     position = 0;
-}
-
-/** Find palm
- * 
- * This function determines if the screen touches correspond to a palm or a pen.
- * 
- * A pen will be determined from this function if and only if there is only 1 point present in four consecutive sets
- * 
- * A palm will be determined if and only if there will be at least 2 points in four consecutive sets
- */
-//void PalmRejection::findPalm()
-//{
-//    //Used to access the four last consecutive sets of points
-//    int firstSet = mod(position - 3);
-//    int secondSet = mod(firstSet + 1);
-//    int thirdSet = mod(secondSet + 1);
-//    int forthSet = mod(thirdSet + 1);
-//
-//    //check # of point in last 4 sets
-//    //if 1 in each, found pen, 
-//    //if more than 1 in each found palm
-//    if ( ( pointToAnalyze[firstSet].size() == 1 ) && ( pointToAnalyze[secondSet].size() == 1 ) && ( pointToAnalyze[thirdSet].size() == 1 ) && ( pointToAnalyze[forthSet].size() == 1 ) )
-//    {
-//        penPresent = true;
-//
-//        //There is no need to check for NULL since we are guarantee that there is 1 point in each set
-//        mPen.setArea(pointToAnalyze[forthSet][0]->getColumn(), pointToAnalyze[forthSet][0]->getRow());
-//        mX = pointToAnalyze[forthSet][0]->x();
-//        mY = pointToAnalyze[forthSet][0]->y();
-//
-//        scribble->screenPressEvent(pointToAnalyze[firstSet][0]);
-//        //std::cout<<"Press -         findPalm()"<<std::endl;
-//        pointToAnalyze[firstSet][0] = NULL;
-//
-//        scribble->screenMoveEvent(pointToAnalyze[secondSet][0]);
-//        pointToAnalyze[secondSet][0] = NULL;
-//
-//        scribble->screenMoveEvent(pointToAnalyze[thirdSet][0]);
-//        pointToAnalyze[thirdSet][0] = NULL;
-//
-//        scribble->screenMoveEvent(pointToAnalyze[forthSet][0]);
-//        pointToAnalyze[forthSet][0] = NULL;
-//
-//        updatePosition();
-//
-//        return;
-//    }
-//
-//    Point * possibleNextPoint = findFurthestPoint();
-//    if ( possibleNextPoint != NULL )
-//    {
-//        possiblePenPoints.push_back(possibleNextPoint);
-//    }
-//
-//    if ( possiblePenPoints.size() > 3 )
-//    {
-//        if(analysePossiblePenPoints())
-//        {
-//            return;
-//        }
-//    }
-//
-//
-//    int count = 0;
-//    if ( pointToAnalyze[firstSet].size() > 1 )
-//    {
-//        count++;
-//    }
-//
-//    if ( pointToAnalyze[secondSet].size() > 1 )
-//    {
-//        count++;
-//    }
-//
-//    if ( pointToAnalyze[thirdSet].size() > 1 )
-//    {
-//        count++;
-//    }
-//
-//    if ( pointToAnalyze[forthSet].size() > 1 )
-//    {
-//        count++;
-//    }
-//
-//    //Check if more than one point is each of the four last sets
-//    //if true set all the points in the four consecutive sets as part of the palm
-//    if ( count > 3 )//else //if ((pointToAnalyze[firstSet].size() > 1) && (pointToAnalyze[secondSet].size() > 1) && (pointToAnalyze[thirdSet].size() > 1) && (pointToAnalyze[forthSet].size() > 1))
-//    {
-//        for ( ushort i = 0; i < pointToAnalyze[firstSet].size(); i++ )
-//        {
-//            if ( pointToAnalyze[firstSet][i] != NULL )
-//            {
-//                mPalm.set(pointToAnalyze[firstSet][i]->getColumn(), pointToAnalyze[firstSet][i]->getRow());
-//            }
-//        }
-//
-//        for ( ushort j = 0; j < pointToAnalyze[secondSet].size(); j++ )
-//        {
-//            if ( pointToAnalyze[secondSet][j] != NULL )
-//            {
-//                mPalm.set(pointToAnalyze[secondSet][j]->getColumn(), pointToAnalyze[secondSet][j]->getRow());
-//            }
-//        }
-//
-//        for ( ushort k = 0; k < pointToAnalyze[thirdSet].size(); k++ )
-//        {
-//            if ( pointToAnalyze[thirdSet][k] != NULL )
-//            {
-//                mPalm.set(pointToAnalyze[thirdSet][k]->getColumn(), pointToAnalyze[thirdSet][k]->getRow());
-//            }
-//        }
-//
-//        for ( ushort l = 0; l < pointToAnalyze[forthSet].size(); l++ )
-//        {
-//            if ( pointToAnalyze[forthSet][l] != NULL )
-//            {
-//                mPalm.set(pointToAnalyze[forthSet][l]->getColumn(), pointToAnalyze[forthSet][l]->getRow());
-//            }
-//        }
-//    }
-//
-//    updatePosition();
-//}
-
-bool PalmRejection::analysePossiblePenPoints()
-{
-    std::vector <Point *> copy;
-    for ( ushort i = 0; i < possiblePenPoints.size(); i++ )
-    {
-        if ( possiblePenPoints[i] != NULL )
-        {
-            copy.push_back(possiblePenPoints[i]);
-        }
-    }
-    possiblePenPoints.clear();
-    for ( ushort i = 0; i < copy.size(); i++ )
-    {
-        possiblePenPoints.push_back(copy[i]);
-    }
-
-    for ( int i = 0; i < ( int ) possiblePenPoints.size() - 1; i++ )
-    {
-
-        int dX = abs(possiblePenPoints[i]->x() - possiblePenPoints[i + 1]->x());
-        int dY = abs(possiblePenPoints[i]->y() - possiblePenPoints[i + 1]->y());
-
-        int rad = sqrt(dX * dX + dY * dY);
-        if ( !( ( MINIMUM_RADIUS < rad ) && ( rad < MAXIMUM_RADIUS ) ) )
-        {
-            possiblePenPoints[i] = NULL;
-            return false;
-        }
-    }
-
-    //If we get here it means we have a pen
-    penPresent = true;
-
-    //possiblePenPoints
-
-    scribble->screenPressEvent(possiblePenPoints[0]);
-
-
-    for ( ushort i = 1; i < possiblePenPoints.size(); i++ )
-    {
-        scribble->screenMoveEvent(possiblePenPoints[i]);
-    }
-
-    //There is no need to check for NULL since we are guarantee that there is 1 point in each set
-    
-    //NEW
-    mPen.clearMatrix();
-
-    mPen.setArea(possiblePenPoints[possiblePenPoints.size() - 1]->getColumn(), possiblePenPoints[possiblePenPoints.size() - 1]->getRow());
-    mX = possiblePenPoints[possiblePenPoints.size() - 1]->x();
-    mY = possiblePenPoints[possiblePenPoints.size() - 1]->y();
-
-    possiblePenPoints.clear();
-
-    updatePosition();
-
-    return true;
 }
