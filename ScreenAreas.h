@@ -8,7 +8,7 @@
 #ifndef SCREENAREAS_H
 #define	SCREENAREAS_H
 
-#include "defines.h"
+#include "Defines.h"
 #include <iostream>
 #include <bitset>
 #include <stdlib.h>

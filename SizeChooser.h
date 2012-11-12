@@ -9,7 +9,7 @@
 #define	SIZECHOOSER_H
 #include "QPainter"
 #include "Point.h"
-#include "defines.h"
+#include "Defines.h"
 #include <sstream>
 
 class SizeChooser

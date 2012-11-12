@@ -13,6 +13,7 @@
       <itemPath>PalmRejection.h</itemPath>
       <itemPath>Path.h</itemPath>
       <itemPath>Point.h</itemPath>
+      <itemPath>Receiver.h</itemPath>
       <itemPath>RedoRequest.h</itemPath>
       <itemPath>Request.h</itemPath>
       <itemPath>ScreenAreas.h</itemPath>
@@ -45,7 +46,6 @@
       <itemPath>Path.cpp</itemPath>
       <itemPath>Point.cpp</itemPath>
       <itemPath>Receiver.cpp</itemPath>
-      <itemPath>Receiver.h</itemPath>
       <itemPath>RedoRequest.cpp</itemPath>
       <itemPath>Request.cpp</itemPath>
       <itemPath>ScreenAreas.cpp</itemPath>

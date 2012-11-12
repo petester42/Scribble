@@ -14,13 +14,13 @@
 #include <pthread.h>
 #include "Point.h"
 #include <errno.h>   /* Error number definitions */
-#include "defines.h"
+#include "Defines.h"
 #include <stdio.h>   /* Standard input/output definitions */
 #include <unistd.h>  /* UNIX standard function definitions */
 #include <queue>
 #include <QThread>
 #include "QQueue"
-#include "scribblearea.h"
+#include "ScribbleArea.h"
 #include <stdlib.h>     /* Needed for the exit() function */
 
 #include "PalmRejection.h"

@@ -9,7 +9,7 @@
 #define	KEYBOARD_H
 
 #include "QPainter"
-#include "defines.h"
+#include "Defines.h"
 #include <QWidget>
 #include "Point.h"
 #include <iostream>

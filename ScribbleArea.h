@@ -30,13 +30,13 @@
 #include <list>
 #include <sstream>
 #include <dirent.h>                     /* To access the file system */
-#include "defines.h"
+#include "Defines.h"
 #include <poppler/qt4/poppler-qt4.h>    /* Poppler library, used for PDF rendering */
 #include "Keyboard.h"
-#include "loadFileWindow.h"
+#include "LoadFileWindow.h"
 #include "ColourPalette.h"
 #include "SizeChooser.h"
-#include "menu.h"
+#include "Menu.h"
 
 #include <QMutex>
 #include "Sender.h"
@@ -176,10 +176,11 @@ private:
     ///////////////////////////////////////////////////////////////////////////////////
     //Needed for the network part of this project
     ///////////////////////////////////////////////////////////////////////////////////
-    void checkRequests();
     void SendTests();
-    
+    void NetworkRequestsAnalyzer();
+
     bool checkMyRequests;
+    int nextRequestID;
 
     typedef std::vector <Request*> Vector_Request;
     Vector_Request *mRequests;
@@ -188,7 +189,7 @@ private:
     Sender * mySender;
     std::string username;
     std::string password;
-    
+
 
 
     //    void InitializeNetwork();

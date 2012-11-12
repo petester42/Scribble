@@ -12,7 +12,7 @@
 #include <pthread.h>
 #include <iostream>
 #include <vector>
-#include "scribblearea.h"
+#include "ScribbleArea.h"
 #include "QQueue"
 #include "ScreenAreas.h"
 

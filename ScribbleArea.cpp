@@ -2,7 +2,7 @@
 
 #include <QtCore/qnamespace.h>
 
-#include "scribblearea.h"
+#include "ScribbleArea.h"
 
 /*! Default constructor
  * \param *parent A pointer to a QWidget parent object
@@ -66,7 +66,7 @@ ScribbleArea::ScribbleArea(QWidget *parent)
     password = "pass";
 
     receiver = new Receiver(mRequests, requestsMutex, username);
-    boost::thread(&ScribbleArea::checkRequests, this);
+    boost::thread(&ScribbleArea::NetworkRequestsAnalyzer, this);
 
     mySender->Login(username, password, receiver->GetMListeningPort());
     boost::thread(&ScribbleArea::SendTests, this);
@@ -1378,11 +1378,21 @@ bool ScribbleArea::drawnPathsAnalyzer(int start, int item, int end)
 /**
  * This function check and executes all the requests that have been received from the server
  */
-void ScribbleArea::checkRequests()
+void ScribbleArea::NetworkRequestsAnalyzer()
 {
-    while ( checkMyRequests )
+    while ( checkMyRequests || mRequests->size() != 0 )
     {
-
+        //sort the mRequests by requestID
+        for (uint i=0;i<mRequests->size();i++)
+        {
+            
+        }
+        //if the first request in the queue has the nextRequestID then execute it
+        //increase nextRequestID
+        //repeat the 2 above steps until either all requests are met or the nextRequestID does not match the ID of the next request in the queue
+        
+        //Repeat the requests each 200 milliseconds
         boost::this_thread::sleep(boost::posix_time::milliseconds(200));
+
     }
 }

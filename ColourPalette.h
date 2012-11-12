@@ -8,7 +8,7 @@
 #ifndef COLORPALETTE_H
 #define	COLORPALETTE_H
 
-#include "defines.h"
+#include "Defines.h"
 #include "QPainter"
 #include "Point.h"
 

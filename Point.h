@@ -8,7 +8,7 @@
 #ifndef POINTS_H
 #define	POINTS_H
 
-#include "defines.h"
+#include "Defines.h"
 #include "QPoint"
 #include <iostream>
 

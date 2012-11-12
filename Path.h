@@ -11,7 +11,7 @@
 #include <vector>
 #include "Point.h" 
 #include "QColor"
-#include "defines.h"
+#include "Defines.h"
 #include "ScreenAreas.h"
 
 #include <iostream>

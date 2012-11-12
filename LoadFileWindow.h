@@ -9,7 +9,7 @@
 #define	LOADFILEWINDOW_H
 
 #include "QPainter"
-#include "defines.h"
+#include "Defines.h"
 #include <sys/types.h>
 #include <dirent.h>
 #include <errno.h>

@@ -5,7 +5,7 @@
  * Created on July 26, 2012, 3:05 PM
  */
 
-#include "menu.h"
+#include "Menu.h"
 
 Menu::Menu() : font("Arial"), fontSize(8)
 {

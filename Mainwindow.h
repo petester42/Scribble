@@ -5,10 +5,10 @@
 #include <QList>
 #include <QMainWindow>
 #include <QString>
-#include "defines.h"
-#include "inputData.h"
+#include "Defines.h"
+#include "InputData.h"
 
-#include "scribblearea.h"
+#include "ScribbleArea.h"
 
 #include "stdio.h"
 

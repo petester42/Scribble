@@ -5,7 +5,7 @@
  * Created on May 3, 2012, 10:43 AM
  */
 
-#include "inputData.h"
+#include "InputData.h"
 
 /*! Default constructor
  * 

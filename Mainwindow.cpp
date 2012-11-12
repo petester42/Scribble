@@ -1,7 +1,7 @@
 #include <QtGui>
 #include <QtCore/qnamespace.h>
 
-#include "mainwindow.h"
+#include "Mainwindow.h"
 
 void testing()
 {

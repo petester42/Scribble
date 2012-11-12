@@ -5,7 +5,7 @@
  * Created on July 16, 2012, 1:13 PM
  */
 
-#include "loadFileWindow.h"
+#include "LoadFileWindow.h"
 
 LoadFileWindow::LoadFileWindow() : start(0), selected(-1)
 {
